@@ -1,0 +1,317 @@
+---
+title: "Presentation shinydashboard"
+author: "DataKnowledge"
+date: "October, 2015"
+output:
+  ioslides_presentation:
+    css: css/shiny_niv1.css
+    highlight: tango
+    smaller: no
+    transition: slower
+    widescreen: yes
+runtime: shiny
+---
+
+##  Shiny Dashboard
+
+**shinydashboard** is an R package that allows to have a different organization of the application. 
+
+A dashboard has three parts: 
+  
+- a header
+- a sidebar
+- a body
+
+##  Shiny Dashboard
+```{r, echo = FALSE, eval = TRUE}
+rmarkdown::render_delayed({
+  suppressPackageStartupMessages(library(shinydashboard))
+  shinyApp(
+    ui = dashboardPage(
+      dashboardHeader(title = "Header"),
+      dashboardSidebar("Sidebar"),
+      dashboardBody("Body")
+    ), 
+    server = function(input, output) {}
+  )
+})
+```
+
+## Shiny Dashboard | The header | Properties
+
+Change the color (among black, purple, green, red, and yellow):
+```{r, echo = TRUE, eval = FALSE}
+dashboardPage(skin = "red")
+```
+
+Add a title: 
+```{r, echo = TRUE, eval = FALSE}
+dashboardHeader(title = "My Dashboard")
+```
+
+Add some message menu:
+```{r, echo = TRUE, eval = FALSE}
+dropdownMenu(type = "messages",
+             messageItem(from = "Sales Dept",
+                         message = "Sales are steady this month."),
+             messageItem(from = "New User", message = "How do I register?",
+                         icon = icon("question"), time = "13:45"),
+             messageItem(from = "Support", message = "The new server is ready.",
+                         icon = icon("life-ring"), time = "2014-12-01")
+)
+```
+
+## Shiny Dashboard | The header | Properties (2)
+
+Add a notification menu:
+  
+```{r, echo = TRUE, eval = FALSE}
+dropdownMenu(type = "notifications", badgeStatus = "success",
+             notificationItem(text = "5 new users today", icon("users")),
+             notificationItem(text = "12 items delivered", icon("truck"),
+                              status = "success"),
+             notificationItem(text = "Server load at 86%",
+                              icon = icon("exclamation-triangle"),
+                              status = "warning")
+)
+```
+
+And a task menu:
+  
+```{r, echo = TRUE, eval = FALSE}
+dropdownMenu(type = "tasks", badgeStatus = "success",
+             taskItem(value = 90, color = "green", "Documentation"),
+             taskItem(value = 17, color = "aqua", "Project X"),
+             taskItem(value = 75, color = "yellow", "Server deployment"),
+             taskItem(value = 80, color = "red", "Overall project")
+)
+```
+
+## Shiny Dashboard: the header
+
+```{r, echo = FALSE, eval = TRUE}
+rmarkdown::render_delayed({
+  suppressPackageStartupMessages(library(shinydashboard))
+  shinyApp(
+    ui = dashboardPage(
+      skin = "red",
+      dashboardHeader(title = "My Dashboard", 
+                      dropdownMenu(type = "messages",
+                                   messageItem(from = "Sales Dept", message = "Sales are steady this month."),
+                                   messageItem(from = "New User", message = "How do I register?",
+                                               icon = icon("question"), time = "13:45"),
+                                   messageItem(from = "Support", message = "The new server is ready.",
+                                               icon = icon("life-ring"), time = "2014-12-01")
+                      ), 
+                      dropdownMenu(type = "notifications", badgeStatus = "success",
+                                   notificationItem(text = "5 new users today", icon("users")),
+                                   notificationItem(text = "12 items delivered", icon("truck"),status = "success"),
+                                   notificationItem(text = "Server load at 86%", icon = icon("exclamation-triangle"),
+                                                    status = "warning")
+                      ), 
+                      dropdownMenu(type = "tasks", badgeStatus = "success",
+                                   taskItem(value = 90, color = "green", "Documentation"),
+                                   taskItem(value = 17, color = "aqua", "Project X"),
+                                   taskItem(value = 75, color = "yellow", "Server deployment"),
+                                   taskItem(value = 80, color = "red", "Overall project")
+                      )
+      ),
+      dashboardSidebar("Sidebar"),
+      dashboardBody("Body")
+    ), 
+    server = function(input, output) { }
+  )
+})
+```
+
+## Shiny Dashboard | The sidebar | Properties
+
+The sidebar functions like a menu. It corresponds to the tabsetPanel of a regular shiny app, but horizontally. 
+And each menu item corresponds to a tabPanel.
+
+In the ui.R:
+```{r, echo = TRUE, eval = FALSE}
+dashboardSidebar(sidebarMenu(
+  menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+  menuItem("Widgets", icon = icon("th"), tabName = "widgets")
+)),
+# Correspondance in the body:
+dashboardBody(
+  tabItems(
+    tabItem(tabName = "dashboard", h2("Dashboard tab content")),
+    tabItem(tabName = "widgets",h2("Widgets tab content"))
+  )
+)
+```
+
+## Shiny Dashboard | The sidebar | Properties (2)
+
+You can also integrate any kind of input, just like in a regular shiny sidebar. But there is a specific input: a sidebarSearchForm, which is on top in the screenshot above.
+
+This is essentially a specially formatted text input and and actionButton which appears as a icon (the icon can be changed with the icon argument): 
+  
+```{r, echo = TRUE, eval = FALSE}
+sidebarSearchForm(textId = "searchText", buttonId = "searchButton",
+                  label = "Search...")
+```
+
+## Shiny Dashboard: the sidebar
+
+```{r, echo = FALSE, eval = TRUE}
+rmarkdown::render_delayed({
+  suppressPackageStartupMessages(library(shinydashboard))
+  shinyApp(
+    ui = dashboardPage(
+      skin = "red",
+      dashboardHeader(title = "My Dashboard", 
+                      dropdownMenu(type = "messages",
+                                   messageItem(from = "Sales Dept",
+                                               message = "Sales are steady this month."),
+                                   messageItem(from = "New User",
+                                               message = "How do I register?",
+                                               icon = icon("question"), time = "13:45"),
+                                   messageItem(from = "Support",
+                                               message = "The new server is ready.",
+                                               icon = icon("life-ring"), time = "2014-12-01")
+                      ), 
+                      dropdownMenu(type = "notifications", badgeStatus = "success",
+                                   notificationItem(text = "5 new users today",
+                                                    icon("users")),
+                                   notificationItem(text = "12 items delivered",
+                                                    icon("truck"), status = "success"),
+                                   notificationItem(text = "Server load at 86%",
+                                                    icon = icon("exclamation-triangle"),
+                                                    status = "warning")
+                      ), 
+                      dropdownMenu(type = "tasks", badgeStatus = "success",
+                                   taskItem(value = 90, color = "green", "Documentation"),
+                                   taskItem(value = 17, color = "aqua", "Project X"),
+                                   taskItem(value = 75, color = "yellow",
+                                            "Server deployment"),
+                                   taskItem(value = 80, color = "red", "Overall project")
+                      )
+      ),
+      dashboardSidebar(sidebarMenu(
+        sidebarSearchForm(textId = "searchText", buttonId = "searchButton",
+                          label = "Search..."),
+        menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+        menuItem("Widgets", icon = icon("th"), tabName = "widgets")
+      )
+      ),
+      dashboardBody(tabItems(
+        tabItem(tabName = "dashboard", h2("Dashboard tab content")),
+        tabItem(tabName = "widgets",h2("Widgets tab content"))
+      ))
+    ), 
+    server = function(input, output) { }
+  )
+})
+```
+
+## Shiny Dashboard | The Body | Properties
+
+The body of a dashboard page can contain any regular Shiny content.
+
+However, if you’re creating a dashboard you’ll likely want to make something that’s more structured. The basic building block of most dashboards is a box. 
+
+- A basic box with an output:
+```{r, echo = TRUE, eval = FALSE}
+box(plotOutput("plot1"))
+```
+
+- A basic box with a title and some inputs:
+```{r, echo = TRUE, eval = FALSE}
+box(title = "Basic box - Inputs", background = "maroon", 
+    sliderInput("slider", "Slider input:", 1, 100, 50),
+    textInput("text", "Text input:")
+)
+```
+
+## Shiny Dashboard | The Body | Properties (2)
+
+- A box with a tabset panel:
+```{r, echo = TRUE, eval = FALSE}
+tabBox(title = "tabBox", id = "tabset1", height = "250px",
+       tabPanel("Tab1", "First tab content"),
+       tabPanel("Tab2", "Tab content 2")
+)
+```
+
+- An info box:
+```{r, echo = TRUE, eval = FALSE}
+infoBox("Info box", 10 * 2, icon = icon("credit-card"))
+```
+
+- A value box:
+```{r, echo = TRUE, eval = FALSE}
+valueBox(10 * 2, "New Orders - value box", icon = icon("credit-card"))
+```
+
+## Shiny Dashboard: the body
+
+```{r, echo = FALSE, eval = TRUE}
+rmarkdown::render_delayed({
+  suppressPackageStartupMessages(library(shiny))
+  suppressPackageStartupMessages(library(shinydashboard))
+  shinyApp(
+    ui = dashboardPage(
+      skin = "red",
+      dashboardHeader(title = "My Dashboard", 
+                      dropdownMenu(type = "messages",
+                                   messageItem(from = "Sales Dept",
+                                               message = "Sales are steady this month."),
+                                   messageItem(from = "New User",
+                                               message = "How do I register?",
+                                               icon = icon("question"), time = "13:45"),
+                                   messageItem(from = "Support",
+                                               message = "The new server is ready.",
+                                               icon = icon("life-ring"),
+                                               time = "2014-12-01")
+                      ), 
+                      dropdownMenu(type = "notifications", badgeStatus = "success",
+                                   notificationItem(text = "5 new users today",
+                                                    icon("users")),
+                                   notificationItem(text = "12 items delivered",
+                                                    icon("truck"), status = "success"),
+                                   notificationItem(text = "Server load at 86%",
+                                                    icon = icon("exclamation-triangle"),
+                                                    status = "warning")
+                      ), 
+                      dropdownMenu(type = "tasks", badgeStatus = "success",
+                                   taskItem(value = 90, color = "green", "Documentation"),
+                                   taskItem(value = 17, color = "aqua", "Project X"),
+                                   taskItem(value = 75, color = "yellow",
+                                            "Server deployment"),
+                                   taskItem(value = 80, color = "red", "Overall project")
+                      )
+      ),
+      dashboardSidebar(sidebarMenu(
+        menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+        menuItem("Widgets", icon = icon("th"), tabName = "widgets")
+      )),
+      dashboardBody(tabItems(
+        tabItem(tabName = "dashboard", 
+                h2("Dashboard tab content"), 
+                fluidRow(box(plotOutput(outputId = "barChart")),
+                         box(title = "Basic box - Inputs", background = "maroon", 
+                             sliderInput("slider", "Slider input:", 1, 100, 50),
+                             textInput("text", "Text input:")
+                         )),
+                fluidRow(tabBox(title = "tabBox", id = "tabset1", height = "250px",
+                                tabPanel("Tab1", "First tab content"),
+                                tabPanel("Tab2", "Tab content 2")),
+                infoBox("Info box", 10 * 2, icon = icon("credit-card")),
+                valueBox(10 * 2, "New Orders - value box", icon = icon("credit-card"))
+                )
+        ),
+        tabItem(tabName = "widgets", h2("Widgets tab content"))
+      ))
+    ), 
+    server = function(input, output) {
+      output$barChart <- renderPlot(
+        barplot(table(stats::rpois(100, lambda = 5)), col = rainbow(20))
+      )
+    }
+  )
+})
+```

@@ -1,0 +1,68 @@
+# Pour aller plus loin : Conditional panels
+
+## Conditional panels | Définition
+
+- Il est possible d'afficher conditionnellement ou non certains éléments :  
+
+```
+conditionalPanel(condition = [...], )
+```
+
+- La condition peut se faire sur des inputs ou des outputs
+- Elle doit être rédigée en __javascript__...
+
+```
+conditionalPanel(condition = "input.checkbox == true", [...])
+```
+
+## Conditional panels | Exemple avec un input
+
+```{r, echo = TRUE, eval = FALSE}
+shinyApp(
+  ui = fluidPage(
+    fluidRow(
+      column(width = 4, align = "center",
+        checkboxInput("checkbox", "View other inputs", value = FALSE)
+      ),
+      column(width = 8, align = "center",
+        conditionalPanel(
+          condition = "input.checkbox == true", 
+          sliderInput("slider", "Select value", min = 1, max = 10, value = 5),
+          textInput("txt", "Enter text", value = "")
+        )
+      )
+    )
+  ),
+  server = function(input, output) {}
+)
+```
+
+## Conditional panels | Exemple avec un input
+
+```{r, echo = FALSE}
+rmarkdown::render_delayed({
+  library(shiny)
+  shinyApp(
+    ui = fluidPage(
+      fluidRow(
+        column(
+          width = 4,
+          align = "center",
+          checkboxInput("checkbox", "View other inputs", value = FALSE)
+        ),
+        column(
+          width = 8,
+          align = "center",
+          conditionalPanel(
+            condition = "input.checkbox == true", 
+            sliderInput("slider", "Select value", min = 1, max = 10, value = 5),
+            textInput("txt", "Enter text", value = "")
+          )
+        )
+      )
+    ),
+    server = function(input, output) {}
+  )
+})
+```
+

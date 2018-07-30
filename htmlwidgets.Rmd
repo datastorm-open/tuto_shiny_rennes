@@ -1,0 +1,224 @@
+# Graphiques intéractifs
+
+## Graphiques intéractifs | Introduction
+
+Avec notamment l'arrivée du package [htmlwidgets](http://www.htmlwidgets.org/), de plus en plus de fonctionnalités de librairies javascript sont accessibles sous __R__ : 
+
+* [dygraphs (time series)](http://rstudio.github.io/dygraphs/)
+* [DT (interactive tables)](http://rstudio.github.io/DT/)
+* [Leafet (maps)](http://rstudio.github.io/leaflet/)
+* [d3heatmap](https://github.com/rstudio/d3heatmap)
+* [rAmCharts](http://datastorm-open.github.io/introduction_ramcharts/)
+* [visNetwork](http://datastorm-open.github.io/visNetwork)
+* ...
+
+Plus généralement, jeter un oeil sur la [gallerie suivante!](http://gallery.htmlwidgets.org/)
+
+## Graphiques intéractifs | Utilisation dans shiny
+
+Tous ces packages sont utilisables simplement dans __shiny__. En effet, ils contiennent les deux fonctions nécessaires : 
+
+- __renderXX__
+- __xxOutput__
+
+Par exemple avec le package  [dygraphs](http://rstudio.github.io/dygraphs/) : 
+
+```{r, eval = FALSE}
+# Server
+output$dygraph <- renderDygraph({
+    dygraph(predicted(), main = "Predicted Deaths/Month")
+})
+# Ui
+dygraphOutput("dygraph")
+```
+
+## Graphiques intéractifs | Utilisation dans shiny
+
+Ces packages arrivent souvent avec des méthodes permettant d'intéragir avec le graphique, en créant des inputs dans **shiny** afin de déclencher des actions . Par exemple : 
+
+- __DT__ : création de *input$tableId_rows_selected*, nous informant sur la/les lignes sélectionnée(s)
+- __Leaflet__ : valeurs du zoom, des clicks, de la latitude/longitude, ...
+- __visNetwork__ : noeuds / groupes sélectionnés, ...
+
+Ces points sont (en général) expliqués sur les pages web des différents packages...
+
+## Graphiques intéractifs | Utilisation dans shiny
+
+De plus, il est également possible d'utiliser de nombreux événements javascripts, et de crééer des nouvelles intéractions avec **shiny** en utilisant *Shiny.onInputChange* : 
+
+```{r, eval = FALSE}
+visNetwork(nodes, edges) %>%
+      visEvents(hoverNode = "function(nodes) {
+        Shiny.onInputChange('current_node_id', nodes);
+      ;}")
+```
+
+<https://shiny.rstudio.com/articles/js-send-message.html>
+
+## Graphiques intéractifs
+
+```{r, echo = FALSE, eval = TRUE, message=FALSE}
+rmarkdown::render_delayed({
+  suppressPackageStartupMessages(library(dygraphs))
+  shinyApp(
+    ui = fluidPage(
+      titlePanel("dygraphs"),
+      tags$div(
+        align = "center",
+        dygraphOutput(output = "dyg")
+      )
+    ), 
+    server = function(input, output) {
+      output$dyg <- renderDygraph({
+        lungDeaths <- cbind(mdeaths, fdeaths)
+        dygraph(lungDeaths)
+      })
+    }
+  )
+})
+```
+
+## Graphiques intéractifs
+
+```{r, echo = FALSE, eval = TRUE, message=FALSE}
+rmarkdown::render_delayed({
+  suppressPackageStartupMessages(library(leaflet))
+  shinyApp(
+    ui = fluidPage(
+        titlePanel("leaflet"),
+      tags$div(
+        align = "center",
+        leafletOutput(output = "map")
+      )
+    ), 
+    server = function(input, output) {
+      output$map <- renderLeaflet({
+        leaflet() %>%
+          addProviderTiles("CartoDB.Positron") %>%
+          addMarkers(lng = -1.70, lat = 48.11, popup = "<b>7e Rencontres R</b> <br/> Agrocampus-Ouest <br/>  35 000 Rennes")
+      })
+    }
+  )
+})
+```
+
+## Graphiques intéractifs
+
+```{r, echo = FALSE, eval = TRUE, message=FALSE}
+rmarkdown::render_delayed({
+  suppressPackageStartupMessages(library(rAmCharts))
+  shinyApp(
+    ui = fluidPage(
+      titlePanel("rAmCharts"),
+      tags$div(
+        align = "center",
+        amChartsOutput(output = "amCharts")
+      )
+    ), 
+    server = function(input, output) {
+      output$amCharts <- renderAmCharts({
+        pipeR::pipeline(
+          amSerialChart(theme = 'light', marginRight = 30, plotAreaBorderAlpha = 0,
+                        categoryField = 'year'),
+          setDataProvider(data.frame(
+            year = 1994:2012, 
+            cars = c(15, 13, 14, 15, 16, 18, 19, 22, 24, 20,
+                     24, 25, 26, 35,36, 37, 38, 39, 40), 
+            motorcycles = c(15, 13, 14, 15, 16, 18, 19, 22,
+                            24, 20, 24, 25, 26, 35, 36, 37, 38, 39, 40), 
+            bicycles = c(15, 13, 14, 15, 16, 18, 19, 22, 24,
+                         20, 24, 25, 26, 35, 36, 37, 38, 39, 40))),
+          setLegend(equalWidths = FALSE,
+                    periodValueText = 'total: [[value.sum]]',
+                    position = 'top', valueAlign = 'left', valueWidth = 100),
+          addValueAxes(stackType = 'regular', gridAlpha = 0.07,
+                       position = 'left', title = 'Traffic incidents'),
+          addGraph(balloonText = '<img src = "http://www.amcharts.com/lib/3/images/car.png" style = "vertical-align:bottom; margin-right: 10px; width:28px; height:21px;"><span style = "font-size:14px; color:#000000;"><b>[[value]]</b></span>', 
+                   fillAlphas = 0.6, hidden = TRUE, lineAlpha = 0.4,
+                   title = 'Cars', valueField = 'cars'),
+          addGraph(balloonText = '<img src = "http://www.amcharts.com/lib/3/images/motorcycle.png" style = "vertical-align:bottom; margin-right: 10px; width:28px; height:21px;"><span style = "font-size:14px; color:#000000;"><b>[[value]]</b></span>', 
+                   fillAlphas = 0.6, lineAlpha = 0.4, title = 'Motorcycles', valueField = 'motorcycles'),
+          addGraph(balloonText = '<img src = "http://www.amcharts.com/lib/3/images/bicycle.png" style = "vertical-align:bottom; margin-right: 10px; width:28px; height:21px;"><span style = "font-size:14px; color:#000000;"><b>[[value]]</b></span>', 
+                   fillAlphas = 0.6, lineAlpha = 0.4, title = 'Bicycles',
+                   valueField = 'bicycles'),
+          setChartCursor(cursorAlpha = 0),
+          setCategoryAxis(startOnAxis = TRUE, axisColor = '#DADADA', gridAlpha = 0.07),
+          setGuides(list(guide(category = '2001', toCategory = '2003',
+                               lineColor = '#CC0000', lineAlpha = 1,
+                               fillAlpha = 0.2,
+                               fillColor = '#CC0000', dashLength = 2, inside = TRUE,
+                               labelRotation = 90,
+                               label = 'fines for speeding increased'),
+                         guide(category = '2007', lineColor = '#CC0000',
+                               lineAlpha = 1,
+                               dashLength = 2, inside = TRUE, labelRotation = 90,
+                               label = 'motorcycle fee introduced'))),
+          setChartScrollbar()
+        )
+      })
+    })
+})
+```
+
+## Graphiques intéractifs
+
+```{r, echo = FALSE, eval = TRUE, message=FALSE}
+rmarkdown::render_delayed({
+  suppressPackageStartupMessages(library(visNetwork))
+  shinyApp(
+    ui = fluidPage(
+      titlePanel("visNetwork"),
+      tags$div(
+        visNetworkOutput(output = "network", height = "350px", width = "100%")
+      )
+    ), 
+    server = function(input, output) {
+      output$network <- renderVisNetwork({
+nodes <- jsonlite::fromJSON("https://raw.githubusercontent.com/datastorm-open/datastorm-open.github.io/master/visNetwork/data/nodes_miserables.json")
+
+edges <- jsonlite::fromJSON("https://raw.githubusercontent.com/datastorm-open/datastorm-open.github.io/master/visNetwork/data/edges_miserables.json")
+
+require(visNetwork)
+visNetwork(nodes, edges, width = "100%") %>%
+  visIgraphLayout() %>%
+  visNodes(size = 10) %>%
+  visOptions(selectedBy = "group", 
+             highlightNearest = TRUE, 
+             nodesIdSelection = TRUE) %>%
+  visPhysics(stabilization = FALSE)
+      })
+    })
+})
+```
+
+
+## Graphiques intéractifs
+
+```{r, echo = FALSE, eval = TRUE}
+rmarkdown::render_delayed({
+  suppressPackageStartupMessages(library(googleVis))
+  shinyApp(
+    ui = fluidPage(
+      titlePanel("googleVis"),
+      tags$div(
+        align = "center",
+        htmlOutput("gvis1"), 
+        h5("Data from:"),
+        a("https://en.wikipedia.org/wiki/List_of_countries_by_credit_rating",
+          href="https://en.wikipedia.org/wiki/List_of_countries_by_credit_rating")
+      )
+    ), 
+    server = function(input, output) {
+      output$gvis1 <- renderGvis({
+        load("./data/data_map.Rdata")
+        levels(x$Rating) <- substring(levels(x$Rating), 4, 
+                                      nchar(levels(x$Rating)))
+        x$Ranking <- x$Rating
+        levels(x$Ranking) <- nlevels(x$Rating):1
+        x$Ranking <- as.character(x$Ranking)
+        x$Rating <- paste(x$Country, x$Rating, sep=": ")
+        gvisGeoChart(x, "Country", "Ranking", hovervar = "Rating")
+      })
+    })
+})
+```

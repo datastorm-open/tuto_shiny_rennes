@@ -1,0 +1,62 @@
+---
+title: "Flex Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+<!-- Learn more about flexdashboard at https://rstudio.github.io/flexdashboard -->
+
+
+```{r setup, include=FALSE}
+# Load packages and initialize data here
+library(flexdashboard)
+library(rAmCharts)
+library(pipeR)
+```
+
+Column 
+-----------------------------------------------------------------------
+
+### Angular Gauge
+
+```{r}
+bands <- data.frame(start = c(0, 40, 60), end = c(40, 60, 100), 
+                   color = c("#00CC00", "#ffac29", "#ea3838"),
+                   stringsAsFactors = FALSE)
+bands2 <- data.frame(start = c(100, 130, 170), end = c(130, 170, 200), 
+                   color = c("#00CC00", "#ffac29", "#ea3838"),
+                   stringsAsFactors = FALSE)
+amAngularGauge(x = 25, start = 0, end = 100, bands = bands,
+               secondAxe = TRUE, start2 = 100, end2 = 200, bands2 = bands2)
+```
+
+### 3D Bar plot
+
+```{r}
+data("data_bar")
+amBarplot(x = "country", y = "visits", data = data_bar, horiz = TRUE, depth = 15)
+```
+
+
+Column 
+-----------------------------------------------------------------------
+
+### Pie chart
+
+```{r}
+data("data_pie")
+amPie(data = data_pie)
+```
+
+### Chart D
+
+```{r}
+data <- data.frame(label = c("A", "Z", "E", "R", "T"),
+                   Product1 = c(1, 2, 3, 4, 2), 
+                   Product2 = c(2, 8, 1, 1, 0),
+                   Product3 = c(1,1,2,2,4))
+amRadar(data = data,  pch = "bubble", backTransparency = 0) %>>% 
+  amOptions(legend = TRUE, legendPosition = "left")
+```

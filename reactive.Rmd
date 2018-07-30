@@ -1,0 +1,99 @@
+# Pour aller plus loin : expressions réactives 
+
+## Expressions réactives 
+
+Les expressions réactives sont très utiles quand on souhaite utiliser le même résultat/objet dans plusieurs outputs, en ne faisant le calcul qu'une fois.
+
+Il suffit pour cela d'utiliser la fonction ``reactive`` dans le __server.R__
+
+Par exemple, nous voulons afficher deux graphiques à la suite d'une ACP: 
+
+* La projection des individus
+* La projection des variables
+
+## Expressions réactives  | Exemple sans une expression réactive
+
+* __server.R__: le calcul est réalisé deux fois...
+
+```{r, echo = TRUE, eval = FALSE}
+require(FactoMineR) ; data("decathlon")
+
+output$graph_pca_ind <- renderPlot({
+  res_pca <- PCA(decathlon[ ,input$variables], graph = FALSE)
+  plot.PCA(res_pca, choix = "ind", axes = c(1,2))
+})
+
+output$graph_pca_var <- renderPlot({
+  res_pca <- PCA(decathlon[,input$variables], graph = FALSE)
+  plot.PCA(res_pca, choix = "var", axes = c(1,2))
+})
+```
+
+## Expressions réactives  | Exemple avec une expression réactive
+
+* __server.R__ : Le calcul est maintenant effectué qu'une seule fois !
+
+```{r, echo = TRUE, eval = FALSE}
+require(FactoMineR) ; data("decathlon")
+
+res_pca <- reactive({
+  PCA(decathlon[,input$variables], graph = FALSE)
+})
+
+output$graph_pca_ind <- renderPlot({
+  plot.PCA(res_pca(), choix = "ind", axes = c(1,2))
+})
+
+output$graph_pca_var <- renderPlot({
+  plot.PCA(res_pca(), choix = "var", axes = c(1,2))
+})
+```
+
+## Expressions réactives  | Note
+
+- Une expression réactive va nous faire gagner du temps et de la mémoire
+
+- __Utiliser des expressions réactives seulement quand cela dépend d'inputs__ (pour d'autres variables : http://shiny.rstudio.com/articles/scoping.html)
+
+- __Comme un output__ : mis-à-jour chaque fois qu'un input présent dans le code change
+
+- __Comme un input__ dans un _renderXX_ : l'output est mis-à-jour quand l'expression réactive change
+
+- On récupère sa valeur comme un appel à une fonction, avec des "()"
+
+## Expressions réactives | autres fonctions
+
+Il existe des alternatives à l'utilisation de ``reactive`` avec ``reactiveValues`` ou ``reactiveVal``.
+
+- ``reactiveValues`` : initialiser une liste d'objets réactifs
+- ``reactiveVal`` : initialiser un seul objet réactif
+- Modification de la valeur des objets avec des ``observe`` ou des ``observeEvent``
+
+```{r, echo = TRUE, eval = FALSE}
+# server.R
+rv <- reactiveValues(data = rnorm(100)) # init
+# update
+observeEvent(input$norm, { rv$data <- rnorm(100) })   
+observeEvent(input$unif, { rv$data <- runif(100) 
+# plot
+output$hist <- renderPlot({hist(rv$data)}) 
+```
+
+----
+
+```{r, echo = FALSE}
+rmarkdown::render_delayed({
+  shinyApp(ui = fluidPage(
+    actionButton(inputId = "norm", label = "Normal"),
+    actionButton(inputId = "unif", label = "Uniform"),
+    plotOutput("hist")
+  ), 
+  server = function(input, output) { 
+    rv <- reactiveValues(data = rnorm(100)) 
+    observeEvent(input$norm, { rv$data <- rnorm(100) })   
+    observeEvent(input$unif, { rv$data <- runif(100) }) 
+    output$hist <- renderPlot({ hist(rv$data) }) 
+  })
+})
+```
+

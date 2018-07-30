@@ -1,0 +1,84 @@
+# Pour aller plus loin : isolation 
+
+## Isolation  | Définition
+
+Par défaut, les outputs et les expressions réactives se mettent à jour automatiquement quand un des inputs présents dans le code change de valeur. Dans certains cas, on aimerait pouvoir contrôler un peu cela.
+
+Par exemple, en utilisant un bouton de validation (__actionButton__) des inputs pour déclencher le calcul des sorties.
+
+- un input peut être isolé comme cela `isolate(input$id)`
+
+- une expression avec la notation suivante `isolate({expr})` et l'utilisation de ``{}``
+
+## Isolation  | Exemple | ui.R
+
+Trois inputs : __color__ et __bins__ pour l'histogramme, et un __actionButton__ :
+
+```{r, echo = TRUE, eval = FALSE}
+shinyUI(fluidPage(
+  titlePanel("Isolation"),
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons(inputId = "col", label = "Choose a color", inline = TRUE,
+                   choices = c("red", "blue", "darkgrey")),
+      sliderInput("bins", "Number of bins:", min = 1, max = 50, value = 30),
+      actionButton("go_graph", "Update !")
+    ),
+    mainPanel(plotOutput("distPlot"))
+  )
+))
+```
+
+## Isolation  | Exemple | server.R
+
+On isole tout le code sauf  l'__actionButton__ :
+
+```{r, echo = TRUE, eval = FALSE}
+shinyServer(function(input, output) {
+  output$distPlot <- renderPlot({
+    input$go_graph
+    isolate({
+      inputColor <- input$color
+      x <- faithful[, 2]
+      bins <- seq(min(x), max(x), length.out = input$bins + 1)
+      hist(x, breaks = bins, col = inputColor, border = 'white')
+    })
+  })
+})
+```
+
+L'histogramme sera donc mis-à-jour quand l'utilisateur cliquera sur le bouton.
+
+## Isolation  | Exemple | App
+
+```{r, echo = FALSE}
+rmarkdown::render_delayed({
+  shinyApp(
+    ui = fluidPage(
+      titlePanel("Isolation"),
+      sidebarLayout(
+        sidebarPanel(
+          radioButtons(inputId = "col", label = "Choose a color", inline = TRUE,
+                       choices = c("red", "blue", "darkgrey")),
+          sliderInput("bins", "Number of breaks:", min = 1, max = 50, value = 30),
+          actionButton("go_graph", "Update !")
+        ),
+        mainPanel(
+          plotOutput("distPlot")
+        )
+      )
+    ), 
+    server = function(input, output) {
+      output$distPlot <- renderPlot({
+        input$go_graph
+        isolate({
+          col <- input$col
+          x <- faithful[, 2]
+          bins <- seq(min(x), max(x), length.out = input$bins + 1)
+          hist(x, breaks = bins, col = col, border = 'white')
+        })
+      })
+    }
+  )
+})
+```

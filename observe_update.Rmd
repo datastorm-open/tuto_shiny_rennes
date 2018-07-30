@@ -1,0 +1,192 @@
+# Pour aller plus loin : observe & fonctions d'update
+
+## Observe & fonctions d'update
+
+- Il existe une série de fonctions pour mettre à jour les inputs et certaines structures
+
+- les fonctions commencent par ``update...``
+
+- On les utilise généralement à l'intérieur d'un ``observe({expr})``
+
+- La syntaxe est similaire à celle des fonctions de création
+
+- __Attention__ : il est nécessaire d'ajouter un argument _"session"_  dans la définition du  **server** 
+
+```{r, echo = TRUE, eval = FALSE}
+shinyServer(function(input, output, session) {...})
+```
+
+------
+
+Sur des inputs :
+
+- __updateCheckboxGroupInput__
+- __updateCheckboxInput__
+- __updateDateInput	Change__ 
+- __updateDateRangeInput__
+- __updateNumericInput__
+- __updateRadioButtons__ 
+- __updateSelectInput__ 
+- __updateSelectizeInput__
+- __updateSliderInput__
+- __updateTextInput__	
+
+Pour changer dynamiquement l'onglet sélectionné :
+
+- __updateNavbarPage__,  __updateNavlistPanel__, __updateTabsetPanel__
+
+## Observe & fonctions d'update | Exemple sur un input | ui.R
+
+```{r, echo = TRUE, eval = FALSE}
+shinyUI(fluidPage(
+  titlePanel("Observe"),
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons(inputId = "id_dataset", label = "Choose a dataset", inline = TRUE,
+                   choices = c("cars", "iris", "quakes"), selected = "cars"),
+      selectInput("id_col", "Choose a column", choices = colnames(cars)),
+      textOutput(outputId = "txt_obs")
+    ),
+    mainPanel(fluidRow(
+      dataTableOutput(outputId = "dataset_obs")
+    ))
+  )
+))
+```
+
+## Observe & fonctions d'update | Exemple sur un input | server.R
+
+```{r, echo = TRUE, eval = FALSE}
+shinyServer(function(input, output, session) {
+  dataset <- reactive(get(input$id_dataset, "package:datasets"))
+  
+  observe({
+    updateSelectInput(session, inputId = "id_col", label = "Choose a column",
+                      choices = colnames(dataset()))
+  })
+  
+  output$txt_obs <- renderText(paste0("Selected column : ", input$id_col))
+  
+  output$dataset_obs <- renderDataTable(
+    dataset(),
+    options = list(pageLength = 5)
+  )
+})
+```
+
+
+## Observe & fonctions d'update | Exemple sur un input | App
+
+```{r, echo = FALSE}
+rmarkdown::render_delayed({
+  shinyApp( ui = fluidPage(
+    titlePanel("Observe"),
+    sidebarLayout(
+      sidebarPanel(
+        radioButtons(inputId = "id_dataset", label = "Choose a dataset", inline = TRUE,
+                     choices = c("cars", "iris", "quakes"), selected = "iris"),
+        selectInput("id_col", "Choose a column", choices = colnames(cars)), 
+        textOutput(outputId = "txt_obs")
+      ),
+      mainPanel(fluidRow(
+        dataTableOutput(outputId = "dataset_obs")
+      ))
+    )
+  ), 
+  server = function(input, output, session) {
+    dataset <- reactive(get(input$id_dataset, "package:datasets"))
+    
+    observe({
+      updateSelectInput(session, inputId = "id_col", label = "Choose a column",
+                        choices = colnames(dataset()))
+    })
+    
+    output$txt_obs <- renderText(paste0("Selected column : ", input$id_col))
+    
+    output$dataset_obs <- renderDataTable(
+      dataset(),
+      options = list(pageLength = 5)
+    )
+  })
+})
+```
+
+## Observe & fonctions d'update | Exemple sur des onglets | ui.R
+
+__Il faut rajouter un id dans la structure__
+
+```{r, echo = TRUE, eval = FALSE}
+shinyUI(
+  navbarPage(
+    id = "idnavbar", # need an id for observe & update
+    title = "A NavBar",
+    tabPanel(title = "Summary",
+             actionButton("goPlot", "Go to plot !")),
+    tabPanel(title = "Plot",
+             actionButton("goSummary", "Go to Summary !"))
+
+  )
+)
+```
+
+## Observe & fonctions d'update | Exemple sur des onglets | server.R
+
+```{r, echo = TRUE, eval = FALSE}
+shinyServer(function(input, output, session) {
+  observe({
+    input$goPlot
+    updateTabsetPanel(session, "idnavbar", selected = "Plot")
+  })
+  observe({
+    input$goSummary
+    updateTabsetPanel(session, "idnavbar", selected = "Summary")
+  })
+})
+```
+
+## Observe & fonctions d'update | Exemple sur des onglets | App
+
+```{r, echo = FALSE}
+rmarkdown::render_delayed({
+  shinyApp( ui = shinyUI(
+  navbarPage(
+    id = "idnavbar", # need an id for oberve & update
+    title = "A NavBar",
+    tabPanel(title = "Summary",
+             actionButton("goPlot", "Go to plot !")),
+    tabPanel(title = "Plot",
+             actionButton("goSummary", "Go to Summary !"))
+
+  )
+  
+), 
+  server = function(input, output, session) {
+  observe({
+    input$goPlot
+    updateTabsetPanel(session, "idnavbar", selected = "Plot")
+  })
+  observe({
+    input$goSummary
+    updateTabsetPanel(session, "idnavbar", selected = "Summary")
+  })
+})
+})
+```
+
+## Observe & fonctions d'update | observeEvent
+
+- Une variante de la fonction ``observe`` est disponible avec la fonction ``observeEvent``
+- On définit alors de façon explicite l'espression qui représente l'événement _et_ l'expression qui sera éxécutée quand l'événement se produit
+
+```{r, echo = TRUE, eval = FALSE}
+# avec un observe
+observe({
+  input$goPlot
+  updateTabsetPanel(session, "idnavbar", selected = "Plot")
+})
+
+# idem avec un observeEvent
+observeEvent(input$goSummary, {
+  updateTabsetPanel(session, "idnavbar", selected = "Summary")
+})
+```

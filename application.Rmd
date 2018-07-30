@@ -1,0 +1,84 @@
+# Structure d'une application
+
+## Structure d'une application | Un dossier avec un seul fichier
+
+**conventions :**
+
+- enregistré sous le nom __app.R__
+- se terminant par la commande shinyApp()
+- pour les **applications légères**
+
+<div style="text-align:center" markdown="1">
+<img src="img/single_app.png" alt="Drawing" style="width: 60%;">
+</div>
+
+## Structure d'une application | Un dossier avec un seul fichier
+
+```{r, eval = FALSE}
+library(shiny)
+ui <- fluidPage(
+  sliderInput(inputId = "num", label = "Choose a number", 
+              value = 25, min = 1, max = 100),  
+  plotOutput("hist")
+)
+server <- function(input, output) {  
+  output$hist <- renderPlot({
+    hist(rnorm(input$num))  
+  }) 
+}
+shinyApp(ui = ui, server = server)
+```
+
+## Structure d'une application | Un dossier avec deux fichiers
+
+**conventions :**
+
+- côté interface utilisateur dans le script __ui.R__
+- côté serveur dans le script __server.R__
+- structure à **priviliégier**
+
+<div style="text-align:center" markdown="1">
+<img src="img/dual_apps.png" alt="Drawing" style="width: 60%;">
+</div>
+
+## Structure d'une application | Un dossier avec deux fichiers
+
+__ui.R__
+```{r, eval = FALSE}
+library(shiny)
+fluidPage(
+  sliderInput(inputId = "num", label = "Choose a number", 
+              value = 25, min = 1, max = 100),  
+  plotOutput("hist")
+)
+```
+
+__server.R__
+```{r, eval = FALSE}
+library(shiny)
+function(input, output) {  
+  output$hist <- renderPlot({hist(rnorm(input$num))}) 
+}
+```
+
+
+## Structure d'une application | données/fichiers complémentaires
+
+- le code __R__ tourne au niveau des scripts __R__, et peut donc accéder de façon relative à tous les objets présents dans le dossier de l'application
+- l'application web, comme de convention, accède à tous les éléments présents dans le dossier ``www`` (css, images, javascript, documentation, ...)
+
+<div style="text-align:center" markdown="1">
+<img src="img/more_apps.png" alt="Drawing" style="width: 70%;">
+</div>
+
+## Structure d'une application | Partage ui <-> server
+
+__Le server et l'ui communiquent uniquement par le biais des inputs et des outputs__
+
+- Nous pouvons ajouter un script nommé **global.R** pour partager des éléments (variables,  packages, ...) entre la partie __UI__ et la partie __SERVER__ 
+
+- Tout ce qui est présent dans le **global.R** est visible à la fois dans le __ui.R__ et dans le __server.R__
+
+- Le script **global.R** est chargé uniquement une seul fois au lancement de l'application
+
+- Dans le cas d'une utilisation avec un ``shiny-server``, les objets globaux sont également partagés entre les utilisateurs
