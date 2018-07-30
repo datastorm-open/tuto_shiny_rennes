@@ -1,0 +1,1 @@
+tabPanel("Data", tableOutput("table"))
