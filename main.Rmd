@@ -1,7 +1,6 @@
 ---
 title: "Premiers pas avec shiny... et les packages de visualisation interactive"
 author: "B.Thieurmel, benoit.thieurmel@datastorm.fr"
-date: "04/07/2018"
 output:
   ioslides_presentation:
     css: css/shiny_niv1.css

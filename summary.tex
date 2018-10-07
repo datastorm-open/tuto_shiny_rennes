@@ -122,10 +122,9 @@ interactive}
 \href{mailto:benoit.thieurmel@datastorm.fr}{\nolinkurl{benoit.thieurmel@datastorm.fr}}}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{04/07/2018}
-
+    \date{}
+    \predate{}\postdate{}
+  
 \usepackage{graphicx}
 \usepackage{float}
 
@@ -303,28 +302,6 @@ complémentaires}\label{donneesfichiers-complementaires}
 
 \includegraphics{img/more_apps.png}
 
-\subsection{Partage ui \textless{}-\textgreater{}
-server}\label{partage-ui---server}
-
-\textbf{Le server et l'ui communiquent uniquement par le biais des
-inputs et des outputs}
-
-\begin{itemize}
-\item
-  Nous pouvons ajouter un script nommé \textbf{global.R} pour partager
-  des éléments (variables, packages, \ldots{}) entre la partie
-  \textbf{UI} et la partie \textbf{SERVER}
-\item
-  Tout ce qui est présent dans le \textbf{global.R} est visible à la
-  fois dans le \textbf{ui.R} et dans le \textbf{server.R}
-\item
-  Le script \textbf{global.R} est chargé uniquement une seul fois au
-  lancement de l'application
-\item
-  Dans le cas d'une utilisation avec un \texttt{shiny-server}, les
-  objets globaux sont également partagés entre les utilisateurs
-\end{itemize}
-
 \section{Intéractivité et
 communication}\label{interactivite-et-communication}
 
@@ -472,6 +449,28 @@ lien change}
 \includegraphics{img/shiny_process.png}
 
 \textbf{C'est plus clair ?}
+
+\subsection{Partage ui \textless{}-\textgreater{}
+server}\label{partage-ui---server}
+
+\textbf{Le server et l'ui communiquent uniquement par le biais des
+inputs et des outputs}
+
+\begin{itemize}
+\item
+  Nous pouvons ajouter un script nommé \textbf{global.R} pour partager
+  des éléments (variables, packages, \ldots{}) entre la partie
+  \textbf{UI} et la partie \textbf{SERVER}
+\item
+  Tout ce qui est présent dans le \textbf{global.R} est visible à la
+  fois dans le \textbf{ui.R} et dans le \textbf{server.R}
+\item
+  Le script \textbf{global.R} est chargé uniquement une seul fois au
+  lancement de l'application
+\item
+  Dans le cas d'une utilisation avec un \texttt{shiny-server}, les
+  objets globaux sont également partagés entre les utilisateurs
+\end{itemize}
 
 \section{Les inputs}\label{les-inputs}
 

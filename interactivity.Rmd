@@ -103,3 +103,15 @@ __Définition des outputs dans le serveur__
 </div>
 
 __C'est plus clair ?__
+
+## Intéractivité et communication | Partage ui <-> server
+
+__Le server et l'ui communiquent uniquement par le biais des inputs et des outputs__
+
+- Nous pouvons ajouter un script nommé **global.R** pour partager des éléments (variables,  packages, ...) entre la partie __UI__ et la partie __SERVER__ 
+
+- Tout ce qui est présent dans le **global.R** est visible à la fois dans le __ui.R__ et dans le __server.R__
+
+- Le script **global.R** est chargé uniquement une seul fois au lancement de l'application
+
+- Dans le cas d'une utilisation avec un ``shiny-server``, les objets globaux sont également partagés entre les utilisateurs
