@@ -16,6 +16,10 @@ Créer un nouveau répertoire pour l'application shiny (__dans RStudio__):
 
 Choisir une application **Multiple File**.
 
+Si __RStudio__ ne vous propose pas l'option **Multiple File* et initie une application basée sur un seul script __app.R__, passer alors par la création de nouveaux fichiers : 
+
+    File > New File > Shiny Web App > Multiple File
+
 Deux fichiers sont créés automatiquement : ui.R et server.R. Lancer directement l'application depuis RStudio via le bouton Run App (flèche verte) situé en haut à droite du script.
 
 * Remplacer le titre de l'application par "Premiers pas avec shiny". 
@@ -61,6 +65,12 @@ output$summary <- renderPrint({
 
 * Ajouter un texte sous le graphique spécifiant le nombre de classes (``input$bins``) de l'histogramme. (Utiliser un ``renderText`` et la fonction ``paste`` côté **server**, avec un ``textOutput`` dans le **ui**.)
 
+* Remplacer le ``selectInput`` créé pour le choix de la couleur par un ``colourInput`` (fonction présente dans le package **colourpicker**)
+
+
+https://cran.r-project.org/web/packages/colourpicker/vignettes/colourpicker.html
+
+* __Aller plus loin__ : permettre à l’utilisateur d’exporter les graphiques. (``downloadButton`` & ``jpeg``)
 
 * __Aller plus loin__ : Essayer de rajouter des options à la visualisation des données. Vous pouvez aller voir également le package complèmentaire [DT](https://github.com/rstudio/DT) (https://github.com/rstudio/DT). 
 
@@ -84,7 +94,7 @@ navlistPanel(
 )
 ``` 
 
-* Onglet *Visualisation* : Remplacer le `sidebarLayout` par une `fluidRow` composée de deux colonnes : 
+* Onglet *Visualisation* : Remplacer le `sidebarLayout` - ``sidebarPanel`` - ``mainPanel`` par une `fluidRow` composée de deux colonnes : 
     + 1/4 : contenu actuel du ``sidebarPanel``
     + 3/4 : contenu actuel du ``mainPanel`` 
     
@@ -143,7 +153,7 @@ amChartsOutput("distPlot")
 
 * Ajouter un `actionButton` couplé à un ``isolate`` pour que les graphiques se mettent à  uniquement lorsque l'on clique sur le bouton.
 
-* Avec l'aide d'un ``observeEvent``, faire en sorte que, lors de la validation des paramètres avec l'`actionButton`, le graphique affiché en premier soit toujours l'histogramme. (``updateTabsetPanel``)
+* Avec l'aide d'un ``observeEvent``, faire en sorte que, lors de la validation des paramètres avec l'`actionButton`, l'onglet affiché soit toujours celui de l'histogramme. (``updateTabsetPanel``)
 
 ```{r, echo = TRUE, eval = FALSE}
 # penser à rajouter "session" en haut du server
@@ -179,10 +189,11 @@ output$plot <- renderPlot({
 
 * Dans un troisième onglet, rédiger un petit résumé sur vous/votre société. Essayer d'ajouter un image (``div`` & ``img``) et un lien vers un site internet (``a``).
 
+* __Aller plus loin__ : Changer le thème de l’application en insérant un .css externe. Par exemple en utilisant bootswatch http://bootswatch.com/3). Attention, **shiny** utilise la version ``3.3.7`` de bootstrap .
+
 ## Prêt pour créer votre application ?
 
-Pour clore cette formation **Shiny**, nous vous proposons la réalisation d’un mini-projet. Celui-ci consistera en la création d’une application Shiny qui répondra à l’une de vos problématiques métier, à partir d’un jeu de
-données de votre choix.
+Pour clore cette formation **Shiny**, nous vous proposons la réalisation d’un mini-projet. Celui-ci consistera en la création d’une application Shiny qui répondra à l’une de vos problématiques métier, à partir d’un jeu de données de votre choix.
 
 Vous pouvez vous inspirer des applications présentes sur les sites suivants :
 

@@ -1,18 +1,11 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
-
-library(shiny)
 
 # Define UI for application that draws a histogram
 shinyUI(
   # navbarPage
-  navbarPage("Old Faithful Geyser Data",
+  navbarPage("Premiers pas avec shiny",
+             
+             # theme css
+             theme = "css/bootstrap.min.css",
              
              # premier onglet Data
              tabPanel("Data", 
@@ -42,8 +35,7 @@ shinyUI(
                                              value = 30),
                                  
                                  # input pour la couleur
-                                 selectInput(inputId = "color", label = "Couleur :",
-                                             choices = c("Rouge" = "red", "Vert" = "green", "Bleu" = "blue")),
+                                 colourInput(inputId = "color", label = "Couleur :", value = "purple"),
                                  
                                  # titre du graphique
                                  textInput(inputId = "titre", label = "Titre :", value = "Histogramme"),
