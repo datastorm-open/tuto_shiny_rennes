@@ -51,6 +51,7 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 - Initialiser une application est simple avec __RStudio__, en créant un nouveau projet
 
     * File > New Project > New Directory > Shiny Web Application
+    * OU File > New File > Shiny Web App > Multiple File
     * Basée sur deux scripts : ui.R et server.R
     * Et utilisant par défaut le sidebar layout
 
