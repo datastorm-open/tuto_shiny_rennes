@@ -1278,8 +1278,8 @@ On peut aussi utiliser le package [shinythemes](http://rstudio.github.io/shinyth
 On peut par exemple aller prendre un thème sur [bootswatch](http://bootswatch.com/).
 
 - Deux façons pour le renseigner : 
-+ argument ``theme`` dans ``fluidPage``
-+ ou avec un tags html : ``tags$head`` et ``tags$link``
+      + argument ``theme`` présent dans certaines fonctions (``fluidPage``, ``navbarPage``, ...)
+      + ou avec un tags html : ``tags$head`` et ``tags$link``
 
 ```{r, eval = FALSE}
 library(shiny)
