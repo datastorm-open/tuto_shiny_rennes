@@ -77,37 +77,37 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 <img src="img/stop.png" alt="Drawing" style="height: 70%">
 </div>
 
-```{r child = 'application.Rmd'}
+```{r child = 'rmd_parts/application.Rmd'}
 ```
 
-```{r child = 'interactivity.Rmd'}
+```{r child = 'rmd_parts/interactivity.Rmd'}
 ```
 
-```{r child = 'input.Rmd'}
+```{r child = 'rmd_parts/input.Rmd'}
 ```
 
-```{r child = 'output.Rmd'}
+```{r child = 'rmd_parts/output.Rmd'}
 ```
 
-```{r child = 'ui_structure.Rmd'}
+```{r child = 'rmd_parts/ui_structure.Rmd'}
 ```
 
-```{r child = 'htmlwidgets.Rmd'}
+```{r child = 'rmd_parts/htmlwidgets.Rmd'}
 ```
 
-```{r child = 'isolation.Rmd'}
+```{r child = 'rmd_parts/isolation.Rmd'}
 ```
 
-```{r child = 'reactive.Rmd'}
+```{r child = 'rmd_parts/reactive.Rmd'}
 ```
 
-```{r child = 'conditionnal.Rmd'}
+```{r child = 'rmd_parts/conditionnal.Rmd'}
 ```
 
-```{r child = 'observe_update.Rmd'}
+```{r child = 'rmd_parts/observe_update.Rmd'}
 ```
 
-```{r child = 'css.Rmd'}
+```{r child = 'rmd_parts/css.Rmd'}
 ```
 
 # Pour aller plus loin : quelques bonnes pratiques
@@ -138,7 +138,7 @@ shinyServer(function(input, output, session) {
 })
 ```
 
-```{r child = 'debug.Rmd'}
+```{r child = 'rmd_parts/debug.Rmd'}
 ```
 
 
