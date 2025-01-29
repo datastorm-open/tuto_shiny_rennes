@@ -135,12 +135,12 @@ rmarkdown::render_delayed({
 
 - __ui.r__: 
 ```{r, echo = TRUE, eval = FALSE}
-dataTableOutput(outputId = "dataTable")
+DT::DTOutput(outputId = "dataTable")
 ```
 - __server.r__:
 ```{r, echo = TRUE, eval = FALSE}
 data("iris")
-output$dataTable <- renderDataTable({
+output$dataTable <- DT::renderDT({
   iris[1:10, ]
 })
 ```
@@ -150,10 +150,10 @@ output$dataTable <- renderDataTable({
 ```{r, echo = FALSE}
 rmarkdown::render_delayed({
   shinyApp(
-    ui = fluidPage( tags$div(dataTableOutput(outputId = "dataTable"), align = 'center')), 
+    ui = fluidPage( tags$div(DT::DTOutput(outputId = "dataTable"), align = 'center')), 
     server = function(input, output) {
       data(iris)
-      output$dataTable <- renderDataTable({
+      output$dataTable <- DT::renderDT({
         iris[1:5, ]
       })
     }

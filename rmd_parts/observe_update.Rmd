@@ -48,7 +48,7 @@ shinyUI(fluidPage(
       textOutput(outputId = "txt_obs")
     ),
     mainPanel(fluidRow(
-      dataTableOutput(outputId = "dataset_obs")
+      DT::DTOutput(outputId = "dataset_obs")
     ))
   )
 ))
@@ -67,7 +67,7 @@ shinyServer(function(input, output, session) {
   
   output$txt_obs <- renderText(paste0("Selected column : ", input$id_col))
   
-  output$dataset_obs <- renderDataTable(
+  output$dataset_obs <- DT::renderDT(
     dataset(),
     options = list(pageLength = 5)
   )
@@ -89,7 +89,7 @@ rmarkdown::render_delayed({
         textOutput(outputId = "txt_obs")
       ),
       mainPanel(fluidRow(
-        dataTableOutput(outputId = "dataset_obs")
+        DT::DTOutput(outputId = "dataset_obs")
       ))
     )
   ), 
@@ -103,7 +103,7 @@ rmarkdown::render_delayed({
     
     output$txt_obs <- renderText(paste0("Selected column : ", input$id_col))
     
-    output$dataset_obs <- renderDataTable(
+    output$dataset_obs <- DT::renderDT(
       dataset(),
       options = list(pageLength = 5)
     )

@@ -67,7 +67,7 @@ ui <- fluidPage(theme = "mytheme.css",
 ----
 
 ```{r, echo = FALSE}
-shinyAppDir(appDir = "shinyApps/customCSS/cssfile")
+shinyAppDir(appDir = "../shinyApps/customCSS/cssfile")
 ```
 
 
@@ -89,7 +89,7 @@ library(shiny)
 ----
 
 ```{r, echo = FALSE}
-shinyAppDir(appDir = "shinyApps/customCSS/cssheader")
+shinyAppDir(appDir = "../shinyApps/customCSS/cssheader")
 ```
 
 
@@ -107,5 +107,5 @@ library(shiny)
 ----
 
 ```{r, echo = FALSE}
-shinyAppDir(appDir = "shinyApps/customCSS/csselement")
+shinyAppDir(appDir = "../shinyApps/customCSS/csselement")
 ```
