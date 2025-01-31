@@ -1,6 +1,6 @@
 
 # Define UI for application that draws a histogram
-shinyUI(
+fluidPage(
   # navbarPage
   navbarPage("Premiers pas avec shiny",
              

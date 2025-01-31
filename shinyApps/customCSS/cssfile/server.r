@@ -1,5 +1,6 @@
 library(shiny)
-shinyServer(function(input, output) {
+
+function(input, output) {
   output$distPlot <- renderPlot({
     input$go_graph
     isolate({
@@ -9,4 +10,4 @@ shinyServer(function(input, output) {
       hist(x, breaks = bins, col = col, border = 'white')
     })
   })
-})
+}

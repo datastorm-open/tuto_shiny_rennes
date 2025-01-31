@@ -15,7 +15,7 @@ Par exemple, en utilisant un bouton de validation (__actionButton__) des inputs 
 Trois inputs : __color__ et __bins__ pour l'histogramme, et un __actionButton__ :
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Isolation"),
   sidebarLayout(
     sidebarPanel(
@@ -26,7 +26,7 @@ shinyUI(fluidPage(
     ),
     mainPanel(plotOutput("distPlot"))
   )
-))
+)
 ```
 
 ## Isolation  | Exemple | server.R
@@ -34,7 +34,7 @@ shinyUI(fluidPage(
 On isole tout le code sauf  l'__actionButton__ :
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyServer(function(input, output) {
+function(input, output) {
   output$distPlot <- renderPlot({
     input$go_graph
     isolate({
@@ -44,7 +44,7 @@ shinyServer(function(input, output) {
       hist(x, breaks = bins, col = inputColor, border = 'white')
     })
   })
-})
+}
 ```
 
 L'histogramme sera donc mis-à-jour quand l'utilisateur cliquera sur le bouton.

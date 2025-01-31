@@ -9,13 +9,13 @@ Le template basique `sidebarLayout` divise la page en deux colonnes et doit cont
 - `mainPanel`, à droite, en général pour les outputs
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Old Faithful Geyser Data"), # title
   sidebarLayout(
     sidebarPanel("Eléments du sidebar (séparés par des virgules)"),
     mainPanel("Eléments du panel (séparés par des virgules)")
   )
-))
+)
 ```
 
 ## Structurer sa page | __sidebarLayout__ | Exemple
@@ -42,14 +42,14 @@ shinyApp(
 Comme avec le ``sidebarPanel`` précédent, on peut griser un ensemble d'éléments en utilisant un ``wellPanel`` :
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Old Faithful Geyser Data"), # title
   wellPanel(
     sliderInput("num", "Choose a number", value = 25, min = 1, max = 100),  
     textInput("title", value = "Histogram", label = "Write a title")
   ),
   plotOutput("hist")
-))
+)
 ```
 
 ## Structurer sa page | __wellPanel__ | Exemple
@@ -81,7 +81,7 @@ shinyApp(
 Utiliser une barre de navigation et des onglets avec `navbarPage` et `tabPanel`:
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(
+fluidPage(
   navbarPage(
     title = "My first app",
     tabPanel(title = "Summary",
@@ -99,7 +99,7 @@ shinyUI(
 Nous pouvons rajouter un second niveau de navigation avec un `navbarMenu` : 
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(
+fluidPage(
   navbarPage(
     title = "My first app",
     tabPanel(title = "Summary",
@@ -138,7 +138,7 @@ shinyApp(
 Plus généralement, nous pouvons créer des onglets à n'importe quel endroit en utilisant `tabsetPanel` & `tabPanel`:
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Old Faithful Geyser Data"), # title
   sidebarLayout(
     sidebarPanel("SIDEBAR"),
@@ -150,7 +150,7 @@ shinyUI(fluidPage(
       )
     )
   )
-))
+)
 ```
 
 ## Structurer sa page | __tabsetPanel__ | Exemple
@@ -181,13 +181,13 @@ shinyApp(
 Une alternative au `tabsetPanel`, pour une disposition verticale plutôt qu'horizontale : ``navlistPanel``
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
       navlistPanel(
         tabPanel("Plot", plotOutput("plot")), 
         tabPanel("Summary", verbatimTextOutput("summary")), 
         tabPanel("Table", tableOutput("table"))
     )
-))
+)
 ```
 
 ## Structurer sa page | __navlistPanel__ | Exemple

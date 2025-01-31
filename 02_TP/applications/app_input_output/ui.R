@@ -11,7 +11,7 @@ library(shiny)
 library(rAmCharts)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
+fluidPage(
   
   # Application title
   titlePanel("Old Faithful Geyser Data"),
@@ -31,4 +31,4 @@ shinyUI(fluidPage(
        plotOutput("distPlot")
     )
   )
-))
+)

@@ -125,17 +125,17 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 
 ```{r, echo = TRUE, eval = FALSE}
 # ui.R
-shinyUI(
+fluidPage(
   navbarPage("Divide UI & SERVER",
     source("src/ui/01_ui_plot.R", local = TRUE)$value,
     source("src/ui/02_ui_data.R", local = TRUE)$value
   )
 )
 # server.R
-shinyServer(function(input, output, session) {
+function(input, output, session) {
   source("src/server/01_server_plot.R", local = TRUE)
   source("src/server/02_server_data.R", local = TRUE)
-})
+}
 ```
 
 ```{r child = 'rmd_parts/debug.Rmd'}

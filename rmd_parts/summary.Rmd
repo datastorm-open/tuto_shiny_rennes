@@ -143,7 +143,7 @@ function(input, output) {
 library(shiny)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
+fluidPage(
   # Application title
   titlePanel("Hello Shiny!"),
   # Sidebar with a slider input for the number of bins
@@ -156,7 +156,7 @@ shinyUI(fluidPage(
     # Show a plot of the generated distribution
     mainPanel(plotOutput(outputId = "distPlot"))
   )
-))
+)
 ```
 
 **server.R**:
@@ -165,7 +165,7 @@ shinyUI(fluidPage(
 library(shiny)
 
 # Define server logic required to draw a histogram
-shinyServer(function(input, output) {
+server <- function(input, output) {
   # Expression that generates a histogram. The expression is
   # wrapped in a call to renderPlot to indicate that:
   #
@@ -178,7 +178,7 @@ shinyServer(function(input, output) {
     # draw the histogram with the specified number of bins
     hist(x, breaks = bins, col = 'darkgray', border = 'white')
   })
-})
+}
 ```
 
 ![hello](img/hello_shiny.png)
@@ -681,13 +681,13 @@ Le template basique `sidebarLayout` divise la page en deux colonnes et doit cont
 - `mainPanel`, à droite, en général pour les outputs
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Old Faithful Geyser Data"), # title
   sidebarLayout(
     sidebarPanel("SIDEBAR"),
     mainPanel("MAINPANEL")
   )
-))
+)
 ```
 
 
@@ -698,14 +698,14 @@ shinyUI(fluidPage(
 Comme avec le ``sidebarPanel`` précédent, on peut griser un ensemble d'éléments en utilisant un ``wellPanel`` :
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Old Faithful Geyser Data"), # title
   wellPanel(
     sliderInput("num", "Choose a number", value = 25, min = 1, max = 100),  
     textInput("title", value = "Histogram", label = "Write a title")
   ),
   plotOutput("hist")
-))
+)
 ```
 
 
@@ -716,7 +716,7 @@ shinyUI(fluidPage(
 Utiliser une barre de navigation et des onglets avec `navbarPage` et `tabPanel`:
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(
+fluidPage(
   navbarPage(
     title = "My first app",
     tabPanel(title = "Summary",
@@ -733,7 +733,7 @@ shinyUI(
 Nous pouvons rajouter un second niveau de navigation avec un `navbarMenu` : 
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(
+fluidPage(
   navbarPage(
     title = "My first app",
     tabPanel(title = "Summary",
@@ -755,7 +755,7 @@ shinyUI(
 Plus généralement, nous pouvons créer des onglets à n'importe quel endroit en utilisant `tabsetPanel` & `tabPanel`:
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Old Faithful Geyser Data"), # title
   sidebarLayout(
     sidebarPanel("SIDEBAR"),
@@ -767,7 +767,7 @@ shinyUI(fluidPage(
       )
     )
   )
-))
+)
 ```
 
 ![pan](img/tabpanel.png)
@@ -777,13 +777,13 @@ shinyUI(fluidPage(
 Une alternative au `tabsetPanel`, pour une disposition verticale plutôt qu'horizontale : ``navlistPanel``
 
 ```{r , echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   navlistPanel(
     tabPanel("Plot", plotOutput("plot")), 
     tabPanel("Summary", verbatimTextOutput("summary")), 
     tabPanel("Table", tableOutput("table"))
   )
-))
+)
 ```
 
 ![pan](img/navList.png)
@@ -906,7 +906,7 @@ Par exemple, en utilisant un bouton de validation (__actionButton__) des inputs 
 Trois inputs : __color__ et __bins__ pour l'histogramme, et un __actionButton__ :
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Isolation"),
   sidebarLayout(
     sidebarPanel(
@@ -917,7 +917,7 @@ shinyUI(fluidPage(
     ),
     mainPanel(plotOutput("distPlot"))
   )
-))
+)
 ```
 
 - __server.r__: 
@@ -925,7 +925,7 @@ shinyUI(fluidPage(
 On isole tout le code sauf  l'__actionButton__ :
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyServer(function(input, output) {
+function(input, output) {
   output$distPlot <- renderPlot({
     input$go_graph
     isolate({
@@ -935,7 +935,7 @@ shinyServer(function(input, output) {
       hist(x, breaks = bins, col = inputColor, border = 'white')
     })
   })
-})
+}
 ```
 
 L'histogramme sera donc mis-à-jour quand l'utilisateur cliquera sur le bouton.
@@ -1115,7 +1115,7 @@ shinyApp(
 - __Attention__ : il est nécessaire d'ajouter un argument _"session"_  dans la définition du  **server** 
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyServer(function(input, output, session) {...})
+server <- function(input, output, session) {...}
 ```
 
 
@@ -1139,7 +1139,7 @@ Pour changer dynamiquement l'onglet sélectionné :
 ## Exemple sur un input
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Observe"),
   sidebarLayout(
     sidebarPanel(
@@ -1152,12 +1152,12 @@ shinyUI(fluidPage(
       DT::DTOutput(outputId = "dataset_obs")
     ))
   )
-))
+)
 ```
 
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyServer(function(input, output, session) {
+function(input, output, session) {
   dataset <- reactive(get(input$id_dataset, "package:datasets"))
   
   observe({
@@ -1171,7 +1171,7 @@ shinyServer(function(input, output, session) {
     dataset(),
     options = list(pageLength = 5)
   )
-})
+}
 ```
 
 ![obs1](img/observer1.png)
@@ -1184,7 +1184,7 @@ shinyServer(function(input, output, session) {
 __Il faut rajouter un id dans la structure__
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyUI(
+fluidPage(
   navbarPage(
     id = "idnavbar", # need an id for oberve & update
     title = "A NavBar",
@@ -1199,7 +1199,7 @@ shinyUI(
 
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyServer(function(input, output, session) {
+function(input, output, session) {
   observe({
     input$goPlot
     updateTabsetPanel(session, "idnavbar", selected = "Plot")
@@ -1208,7 +1208,7 @@ shinyServer(function(input, output, session) {
     input$goSummary
     updateTabsetPanel(session, "idnavbar", selected = "Summary")
   })
-})
+}
 ```
 
 ## observeEvent
@@ -1335,17 +1335,17 @@ h1("Mon titre", style = "color: #48ca3b;")
 
 ```{r, echo = TRUE, eval = FALSE}
 # ui.R
-shinyUI(
+fluidPage(
   navbarPage("Divide UI & SERVER",
     source("src/ui/01_ui_plot.R", local = TRUE)$value,
     source("src/ui/02_ui_data.R", local = TRUE)$value
   )
 )
 # server.R
-shinyServer(function(input, output, session) {
+function(input, output, session) {
   source("src/server/01_server_plot.R", local = TRUE)
   source("src/server/02_server_data.R", local = TRUE)
-})
+}
 ```
 
 # Débogage

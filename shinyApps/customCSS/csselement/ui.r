@@ -1,5 +1,5 @@
 library(shiny)
-shinyUI(
+fluidPage(
   navbarPage(
     # un css externe
     tags$head(

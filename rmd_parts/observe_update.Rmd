@@ -13,7 +13,7 @@
 - __Attention__ : il est nécessaire d'ajouter un argument _"session"_  dans la définition du  **server** 
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyServer(function(input, output, session) {...})
+server <- function(input, output, session) {...}
 ```
 
 ------
@@ -38,7 +38,7 @@ Pour changer dynamiquement l'onglet sélectionné :
 ## Observe & fonctions d'update | Exemple sur un input | ui.R
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyUI(fluidPage(
+fluidPage(
   titlePanel("Observe"),
   sidebarLayout(
     sidebarPanel(
@@ -51,13 +51,13 @@ shinyUI(fluidPage(
       DT::DTOutput(outputId = "dataset_obs")
     ))
   )
-))
+)
 ```
 
 ## Observe & fonctions d'update | Exemple sur un input | server.R
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyServer(function(input, output, session) {
+function(input, output, session) {
   dataset <- reactive(get(input$id_dataset, "package:datasets"))
   
   observe({
@@ -71,7 +71,7 @@ shinyServer(function(input, output, session) {
     dataset(),
     options = list(pageLength = 5)
   )
-})
+}
 ```
 
 
@@ -116,7 +116,7 @@ rmarkdown::render_delayed({
 __Il faut rajouter un id dans la structure__
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyUI(
+fluidPage(
   navbarPage(
     id = "idnavbar", # need an id for observe & update
     title = "A NavBar",
@@ -124,7 +124,7 @@ shinyUI(
              actionButton("goPlot", "Go to plot !")),
     tabPanel(title = "Plot",
              actionButton("goSummary", "Go to Summary !"))
-
+    
   )
 )
 ```
@@ -132,7 +132,7 @@ shinyUI(
 ## Observe & fonctions d'update | Exemple sur des onglets | server.R
 
 ```{r, echo = TRUE, eval = FALSE}
-shinyServer(function(input, output, session) {
+function(input, output, session) {
   observe({
     input$goPlot
     updateTabsetPanel(session, "idnavbar", selected = "Plot")
@@ -141,35 +141,35 @@ shinyServer(function(input, output, session) {
     input$goSummary
     updateTabsetPanel(session, "idnavbar", selected = "Summary")
   })
-})
+}
 ```
 
 ## Observe & fonctions d'update | Exemple sur des onglets | App
 
 ```{r, echo = FALSE}
 rmarkdown::render_delayed({
-  shinyApp( ui = shinyUI(
-  navbarPage(
-    id = "idnavbar", # need an id for oberve & update
-    title = "A NavBar",
-    tabPanel(title = "Summary",
-             actionButton("goPlot", "Go to plot !")),
-    tabPanel(title = "Plot",
-             actionButton("goSummary", "Go to Summary !"))
-
-  )
-  
-), 
-  server = function(input, output, session) {
-  observe({
-    input$goPlot
-    updateTabsetPanel(session, "idnavbar", selected = "Plot")
-  })
-  observe({
-    input$goSummary
-    updateTabsetPanel(session, "idnavbar", selected = "Summary")
-  })
-})
+  shinyApp( 
+    ui = fluidPage(
+      navbarPage(
+        id = "idnavbar", # need an id for oberve & update
+        title = "A NavBar",
+        tabPanel(title = "Summary",
+                 actionButton("goPlot", "Go to plot !")),
+        tabPanel(title = "Plot",
+                 actionButton("goSummary", "Go to Summary !"))
+        
+      )
+    ), 
+    server = function(input, output, session) {
+      observe({
+        input$goPlot
+        updateTabsetPanel(session, "idnavbar", selected = "Plot")
+      })
+      observe({
+        input$goSummary
+        updateTabsetPanel(session, "idnavbar", selected = "Summary")
+      })
+    })
 })
 ```
 

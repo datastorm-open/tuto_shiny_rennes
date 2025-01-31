@@ -1,5 +1,5 @@
 library(shiny)
-shinyUI(
+fluidPage(
   # fluidPage(theme = "bootstrap.min.css",
   navbarPage(
     tags$head(

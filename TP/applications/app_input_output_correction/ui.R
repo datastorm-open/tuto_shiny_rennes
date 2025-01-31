@@ -2,7 +2,7 @@ library(shiny)
 library(colourpicker)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
+fluidPage(
   
   # Application title
   titlePanel("Premiers pas avec shiny"),
@@ -43,4 +43,4 @@ shinyUI(fluidPage(
        DT::DTOutput("table")
     )
   )
-))
+)

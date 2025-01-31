@@ -17,7 +17,7 @@ data(iris)
 # # shiny::runApp("shinyApps/debug", display.mode="showcase")
 
 
-shinyServer(function(input, output) {
+function(input, output) {
   output$distPlot <- renderPlot({
     if(input$go_graph > 0){
       isolate({
@@ -36,4 +36,4 @@ shinyServer(function(input, output) {
       }) 
     }
   })
-})
+}

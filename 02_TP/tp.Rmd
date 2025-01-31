@@ -157,7 +157,7 @@ amChartsOutput("distPlot")
 
 ```{r, echo = TRUE, eval = FALSE}
 # penser à rajouter "session" en haut du server
-shinyServer(function(input, output, session)
+server <- function(input, output, session) {...}
 
 # et un identifiant au panel d'onglet
 tabsetPanel(id = "viz", 

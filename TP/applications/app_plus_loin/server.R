@@ -1,5 +1,5 @@
 # Define server logic required to draw a histogram
-shinyServer(function(input, output, session) {
+function(input, output, session) {
   
   # partage du vecteur entre les outpus en
   data <- reactive({
@@ -52,4 +52,4 @@ shinyServer(function(input, output, session) {
     updateTabsetPanel(session, inputId = "viz", selected = "Histogramme")
   })
   
-})
+}
