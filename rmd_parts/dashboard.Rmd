@@ -12,7 +12,7 @@ output:
 ```{r setup, include=FALSE}
 # Load packages and initialize data here
 library(flexdashboard)
-library(rAmCharts)
+# library(rAmCharts)
 library(pipeR)
 ```
 

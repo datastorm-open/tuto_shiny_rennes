@@ -2,17 +2,17 @@
 function(input, output) {
    
   # renderPlot <- renderAmCharts
-  output$distPlot <- renderAmCharts({
-    
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, input$var] 
-    bins <- round(seq(min(x), max(x), length.out = input$bins + 1), 2)
-    
-    # use amHist
-    amHist(x = x, control_hist = list(breaks = bins), 
-           col = input$color, main = input$titre, 
-           export = TRUE, zoom = TRUE)
-  })
+  # output$distPlot <- renderAmCharts({
+  #   
+  #   # generate bins based on input$bins from ui.R
+  #   x    <- faithful[, input$var] 
+  #   bins <- round(seq(min(x), max(x), length.out = input$bins + 1), 2)
+  #   
+  #   # use amHist
+  #   amHist(x = x, control_hist = list(breaks = bins), 
+  #          col = input$color, main = input$titre, 
+  #          export = TRUE, zoom = TRUE)
+  # })
   
   # renderPlot <- renderAmCharts
   output$boxplot <- renderAmCharts({

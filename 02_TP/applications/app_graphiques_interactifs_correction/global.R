@@ -1,5 +1,5 @@
 library(shiny)
-library(rAmCharts)
+# library(rAmCharts)
 library(colourpicker)
 
 # chargement des fonctions

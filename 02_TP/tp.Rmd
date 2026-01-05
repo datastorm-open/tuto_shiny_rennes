@@ -131,19 +131,19 @@ tabsetPanel(
 ```{r, echo = TRUE, eval = FALSE}
 # syntaxe pour l'histogramme côté server
 # renderPlot <- renderAmCharts
-output$distPlot <- renderAmCharts({
-    x    <- faithful[, input$var] 
-    bins <- round(seq(min(x), max(x), length.out = input$bins + 1), 2)
-    
-    # use amHist
-    amHist(x = x, control_hist = list(breaks = bins), 
-           col = input$color, main = input$titre, 
-           export = TRUE, zoom = TRUE)
-})
-
-# syntaxe pour l'histogramme côté ui
-# plotOutput -> amChartsOutput
-amChartsOutput("distPlot")
+# output$distPlot <- renderAmCharts({
+#     x    <- faithful[, input$var] 
+#     bins <- round(seq(min(x), max(x), length.out = input$bins + 1), 2)
+#     
+#     # use amHist
+#     amHist(x = x, control_hist = list(breaks = bins), 
+#            col = input$color, main = input$titre, 
+#            export = TRUE, zoom = TRUE)
+# })
+# 
+# # syntaxe pour l'histogramme côté ui
+# # plotOutput -> amChartsOutput
+# amChartsOutput("distPlot")
 ```
 
 

@@ -8,7 +8,7 @@
 #
 
 library(shiny)
-library(rAmCharts)
+# library(rAmCharts)
 
 # Define UI for application that draws a histogram
 fluidPage(

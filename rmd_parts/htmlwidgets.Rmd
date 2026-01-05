@@ -106,56 +106,56 @@ rmarkdown::render_delayed({
 
 ```{r, echo = FALSE, eval = TRUE, message=FALSE}
 rmarkdown::render_delayed({
-  suppressPackageStartupMessages(library(rAmCharts))
+#   suppressPackageStartupMessages(library(rAmCharts))
   shinyApp(
     ui = fluidPage(
       titlePanel("rAmCharts"),
       tags$div(
         align = "center",
-        amChartsOutput(output = "amCharts")
+#         amChartsOutput(output = "amCharts")
       )
-    ), 
+    ),
     server = function(input, output) {
-      output$amCharts <- renderAmCharts({
-        pipeR::pipeline(
-          amSerialChart(theme = 'light', marginRight = 30, plotAreaBorderAlpha = 0,
-                        categoryField = 'year'),
-          setDataProvider(data.frame(
-            year = 1994:2012, 
-            cars = c(15, 13, 14, 15, 16, 18, 19, 22, 24, 20,
-                     24, 25, 26, 35,36, 37, 38, 39, 40), 
-            motorcycles = c(15, 13, 14, 15, 16, 18, 19, 22,
-                            24, 20, 24, 25, 26, 35, 36, 37, 38, 39, 40), 
-            bicycles = c(15, 13, 14, 15, 16, 18, 19, 22, 24,
-                         20, 24, 25, 26, 35, 36, 37, 38, 39, 40))),
-          setLegend(equalWidths = FALSE,
-                    periodValueText = 'total: [[value.sum]]',
-                    position = 'top', valueAlign = 'left', valueWidth = 100),
-          addValueAxes(stackType = 'regular', gridAlpha = 0.07,
-                       position = 'left', title = 'Traffic incidents'),
-          addGraph(balloonText = '<img src = "http://www.amcharts.com/lib/3/images/car.png" style = "vertical-align:bottom; margin-right: 10px; width:28px; height:21px;"><span style = "font-size:14px; color:#000000;"><b>[[value]]</b></span>', 
-                   fillAlphas = 0.6, hidden = TRUE, lineAlpha = 0.4,
-                   title = 'Cars', valueField = 'cars'),
-          addGraph(balloonText = '<img src = "http://www.amcharts.com/lib/3/images/motorcycle.png" style = "vertical-align:bottom; margin-right: 10px; width:28px; height:21px;"><span style = "font-size:14px; color:#000000;"><b>[[value]]</b></span>', 
-                   fillAlphas = 0.6, lineAlpha = 0.4, title = 'Motorcycles', valueField = 'motorcycles'),
-          addGraph(balloonText = '<img src = "http://www.amcharts.com/lib/3/images/bicycle.png" style = "vertical-align:bottom; margin-right: 10px; width:28px; height:21px;"><span style = "font-size:14px; color:#000000;"><b>[[value]]</b></span>', 
-                   fillAlphas = 0.6, lineAlpha = 0.4, title = 'Bicycles',
-                   valueField = 'bicycles'),
-          setChartCursor(cursorAlpha = 0),
-          setCategoryAxis(startOnAxis = TRUE, axisColor = '#DADADA', gridAlpha = 0.07),
-          setGuides(list(guide(category = '2001', toCategory = '2003',
-                               lineColor = '#CC0000', lineAlpha = 1,
-                               fillAlpha = 0.2,
-                               fillColor = '#CC0000', dashLength = 2, inside = TRUE,
-                               labelRotation = 90,
-                               label = 'fines for speeding increased'),
-                         guide(category = '2007', lineColor = '#CC0000',
-                               lineAlpha = 1,
-                               dashLength = 2, inside = TRUE, labelRotation = 90,
-                               label = 'motorcycle fee introduced'))),
-          setChartScrollbar()
-        )
-      })
+      # output$amCharts <- renderAmCharts({
+      #   pipeR::pipeline(
+      #     amSerialChart(theme = 'light', marginRight = 30, plotAreaBorderAlpha = 0,
+      #                   categoryField = 'year'),
+      #     setDataProvider(data.frame(
+      #       year = 1994:2012,
+      #       cars = c(15, 13, 14, 15, 16, 18, 19, 22, 24, 20,
+      #                24, 25, 26, 35,36, 37, 38, 39, 40),
+      #       motorcycles = c(15, 13, 14, 15, 16, 18, 19, 22,
+      #                       24, 20, 24, 25, 26, 35, 36, 37, 38, 39, 40),
+      #       bicycles = c(15, 13, 14, 15, 16, 18, 19, 22, 24,
+      #                    20, 24, 25, 26, 35, 36, 37, 38, 39, 40))),
+      #     setLegend(equalWidths = FALSE,
+      #               periodValueText = 'total: [[value.sum]]',
+      #               position = 'top', valueAlign = 'left', valueWidth = 100),
+      #     addValueAxes(stackType = 'regular', gridAlpha = 0.07,
+      #                  position = 'left', title = 'Traffic incidents'),
+      #     addGraph(balloonText = '<img src = "http://www.amcharts.com/lib/3/images/car.png" style = "vertical-align:bottom; margin-right: 10px; width:28px; height:21px;"><span style = "font-size:14px; color:#000000;"><b>[[value]]</b></span>',
+      #              fillAlphas = 0.6, hidden = TRUE, lineAlpha = 0.4,
+      #              title = 'Cars', valueField = 'cars'),
+      #     addGraph(balloonText = '<img src = "http://www.amcharts.com/lib/3/images/motorcycle.png" style = "vertical-align:bottom; margin-right: 10px; width:28px; height:21px;"><span style = "font-size:14px; color:#000000;"><b>[[value]]</b></span>',
+      #              fillAlphas = 0.6, lineAlpha = 0.4, title = 'Motorcycles', valueField = 'motorcycles'),
+      #     addGraph(balloonText = '<img src = "http://www.amcharts.com/lib/3/images/bicycle.png" style = "vertical-align:bottom; margin-right: 10px; width:28px; height:21px;"><span style = "font-size:14px; color:#000000;"><b>[[value]]</b></span>',
+      #              fillAlphas = 0.6, lineAlpha = 0.4, title = 'Bicycles',
+      #              valueField = 'bicycles'),
+      #     setChartCursor(cursorAlpha = 0),
+      #     setCategoryAxis(startOnAxis = TRUE, axisColor = '#DADADA', gridAlpha = 0.07),
+      #     setGuides(list(guide(category = '2001', toCategory = '2003',
+      #                          lineColor = '#CC0000', lineAlpha = 1,
+      #                          fillAlpha = 0.2,
+      #                          fillColor = '#CC0000', dashLength = 2, inside = TRUE,
+      #                          labelRotation = 90,
+      #                          label = 'fines for speeding increased'),
+      #                    guide(category = '2007', lineColor = '#CC0000',
+      #                          lineAlpha = 1,
+      #                          dashLength = 2, inside = TRUE, labelRotation = 90,
+      #                          label = 'motorcycle fee introduced'))),
+      #     setChartScrollbar()
+      #   )
+      # })
     })
 })
 ```
@@ -171,21 +171,21 @@ rmarkdown::render_delayed({
       tags$div(
         visNetworkOutput(output = "network", height = "350px", width = "100%")
       )
-    ), 
+    ),
     server = function(input, output) {
       output$network <- renderVisNetwork({
-nodes <- jsonlite::fromJSON("https://raw.githubusercontent.com/datastorm-open/datastorm-open.github.io/master/visNetwork/data/nodes_miserables.json")
-
-edges <- jsonlite::fromJSON("https://raw.githubusercontent.com/datastorm-open/datastorm-open.github.io/master/visNetwork/data/edges_miserables.json")
-
-require(visNetwork)
-visNetwork(nodes, edges, width = "100%") %>%
-  visIgraphLayout() %>%
-  visNodes(size = 10) %>%
-  visOptions(selectedBy = "group", 
-             highlightNearest = TRUE, 
-             nodesIdSelection = TRUE) %>%
-  visPhysics(stabilization = FALSE)
+        nodes <- jsonlite::fromJSON("https://raw.githubusercontent.com/datastorm-open/datastorm-open.github.io/master/visNetwork/data/nodes_miserables.json")
+        
+        edges <- jsonlite::fromJSON("https://raw.githubusercontent.com/datastorm-open/datastorm-open.github.io/master/visNetwork/data/edges_miserables.json")
+        
+        require(visNetwork)
+        visNetwork(nodes, edges, width = "100%") %>%
+          visIgraphLayout() %>%
+          visNodes(size = 10) %>%
+          visOptions(selectedBy = "group",
+                     highlightNearest = TRUE,
+                     nodesIdSelection = TRUE) %>%
+          visPhysics(stabilization = FALSE)
       })
     })
 })
@@ -196,29 +196,29 @@ visNetwork(nodes, edges, width = "100%") %>%
 
 ```{r, echo = FALSE, eval = TRUE}
 rmarkdown::render_delayed({
-  suppressPackageStartupMessages(library(googleVis))
+  # suppressPackageStartupMessages(library(googleVis))
   shinyApp(
     ui = fluidPage(
       titlePanel("googleVis"),
       tags$div(
-        align = "center",
-        htmlOutput("gvis1"), 
-        h5("Data from:"),
-        a("https://en.wikipedia.org/wiki/List_of_countries_by_credit_rating",
-          href="https://en.wikipedia.org/wiki/List_of_countries_by_credit_rating")
+#         align = "center",
+#         htmlOutput("gvis1"), 
+#         h5("Data from:"),
+#         a("https://en.wikipedia.org/wiki/List_of_countries_by_credit_rating",
+#           href="https://en.wikipedia.org/wiki/List_of_countries_by_credit_rating")
       )
-    ), 
+    ),
     server = function(input, output) {
-      output$gvis1 <- renderGvis({
-        load("./data/data_map.Rdata")
-        levels(x$Rating) <- substring(levels(x$Rating), 4, 
-                                      nchar(levels(x$Rating)))
-        x$Ranking <- x$Rating
-        levels(x$Ranking) <- nlevels(x$Rating):1
-        x$Ranking <- as.character(x$Ranking)
-        x$Rating <- paste(x$Country, x$Rating, sep=": ")
-        gvisGeoChart(x, "Country", "Ranking", hovervar = "Rating")
-      })
+#       output$gvis1 <- renderGvis({
+#         load("./data/data_map.Rdata")
+#         levels(x$Rating) <- substring(levels(x$Rating), 4, 
+#                                       nchar(levels(x$Rating)))
+#         x$Ranking <- x$Rating
+#         levels(x$Ranking) <- nlevels(x$Rating):1
+#         x$Ranking <- as.character(x$Ranking)
+#         x$Rating <- paste(x$Country, x$Rating, sep=": ")
+#         gvisGeoChart(x, "Country", "Ranking", hovervar = "Rating")
+#       })
     })
 })
 ```
