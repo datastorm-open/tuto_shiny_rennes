@@ -76,37 +76,37 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 <img src="img/stop.png" alt="Drawing" style="height: 70%">
 </div>
 
-```{r child = 'rmd_parts/application.Rmd'}
+```{r child = 'slides/01_application.Rmd'}
 ```
 
-```{r child = 'rmd_parts/interactivity.Rmd'}
+```{r child = 'slides/02_interactivity.Rmd'}
 ```
 
-```{r child = 'rmd_parts/input.Rmd'}
+```{r child = 'slides/03_input.Rmd'}
 ```
 
-```{r child = 'rmd_parts/output.Rmd'}
+```{r child = 'slides/04_output.Rmd'}
 ```
 
-```{r child = 'rmd_parts/ui_structure.Rmd'}
+```{r child = 'slides/05_ui_structure.Rmd'}
 ```
 
-```{r child = 'rmd_parts/htmlwidgets.Rmd'}
+```{r child = 'slides/06_htmlwidgets.Rmd'}
 ```
 
-```{r child = 'rmd_parts/isolation.Rmd'}
+```{r child = 'slides/07_isolation.Rmd'}
 ```
 
-```{r child = 'rmd_parts/reactive.Rmd'}
+```{r child = 'slides/08_reactive.Rmd'}
 ```
 
-```{r child = 'rmd_parts/conditionnal.Rmd'}
+```{r child = 'slides/09_conditionnal.Rmd'}
 ```
 
-```{r child = 'rmd_parts/observe_update.Rmd'}
+```{r child = 'slides/10_observe_update.Rmd'}
 ```
 
-```{r child = 'rmd_parts/css.Rmd'}
+```{r child = 'slides/11_css.Rmd'}
 ```
 
 # Pour aller plus loin : quelques bonnes pratiques
@@ -137,7 +137,7 @@ function(input, output, session) {
 }
 ```
 
-```{r child = 'rmd_parts/debug.Rmd'}
+```{r child = 'slides/12_debug.Rmd'}
 ```
 
 
