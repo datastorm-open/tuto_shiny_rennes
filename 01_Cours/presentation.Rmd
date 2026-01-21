@@ -43,7 +43,7 @@ __Shiny__ est un package __R__ qui permet la création simple d'applications web
 Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 
 <div style="text-align:center" markdown="1">
-<img src="img/server_R.png" alt="Drawing" style="width: 90%; height: 90%">
+<img src="img/01_server_R.png" alt="Drawing" style="width: 90%; height: 90%">
 </div>
 
 ## Ma première application avec shiny
@@ -63,7 +63,7 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 ----
 
 <div style="text-align:center" markdown="1">
-<img src="img/run_app.png" alt="Drawing" style="width: 90%;">
+<img src="img/02_run_app.png" alt="Drawing" style="width: 90%;">
 </div>
 
 - __Run in Window__ : Nouvelle fenêtre, utilisant l'environnement __RStudio__
@@ -73,7 +73,7 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 ----
 
 <div style="text-align:center" markdown="1">
-<img src="img/stop.png" alt="Drawing" style="height: 70%">
+<img src="img/03_stop.png" alt="Drawing" style="height: 70%">
 </div>
 
 ```{r child = 'slides/01_application.Rmd'}

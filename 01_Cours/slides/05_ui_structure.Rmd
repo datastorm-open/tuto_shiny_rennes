@@ -265,7 +265,7 @@ shinyApp(
 Le package [shinydashboard](https://rstudio.github.io/shinydashboard/) propose d'autres fonctions pour créer des tableaux de bords :
 
 <div style="text-align:center" markdown="1">
-<img src="img/dash.png" alt="Drawing" style="width: 60%;">
+<img src="img/38_dash.png" alt="Drawing" style="width: 60%;">
 </div>
 
 <https://rstudio.github.io/shinydashboard/>

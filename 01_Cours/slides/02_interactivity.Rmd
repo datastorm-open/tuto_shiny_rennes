@@ -42,7 +42,7 @@ shinyApp(
 ## Intéractivité et communication | Introduction | process
 
 <div style="text-align:center" markdown="1">
-<img src="img/shiny_process.png" alt="Drawing" style="width: 90%;">
+<img src="img/08_shiny_process.png" alt="Drawing" style="width: 90%;">
 </div>
 
 __Le server et l'ui communiquent uniquement par le biais des inputs et des outputs__
@@ -70,7 +70,7 @@ __Deux types d'éléments dans le UI__
     * accessible côté serveur avec son identifiant __input$inputID__
 
 <div style="text-align:center" markdown="1">
-<img src="img/xxInput.png" alt="Drawing" style="width: 65%;">
+<img src="img/09_xxInput.png" alt="Drawing" style="width: 65%;">
 </div>
 
 ## Intéractivité et communication | UI
@@ -81,7 +81,7 @@ __Deux types d'éléments dans le UI__
     * en général : graphiques et tableaux
 
 <div style="text-align:center" markdown="1">
-<img src="img/xxOutput.png" alt="Drawing" style="width: 70%;">
+<img src="img/10_xxOutput.png" alt="Drawing" style="width: 70%;">
 </div>
 
 ## Intéractivité et communication | Serveur
@@ -93,13 +93,13 @@ __Définition des outputs dans le serveur__
     * calcule et retourne une sortie, dépendante d'inputs, via une expression __R__
 
 <div style="text-align:center" markdown="1">
-<img src="img/renderXX.png" alt="Drawing" style="width: 70%;">
+<img src="img/11_renderXX.png" alt="Drawing" style="width: 70%;">
 </div>
 
 ## Intéractivité et communication | Retour sur le process
 
 <div style="text-align:center" markdown="1">
-<img src="img/shiny_process.png" alt="Drawing" style="width: 90%;">
+<img src="img/08_shiny_process.png" alt="Drawing" style="width: 90%;">
 </div>
 
 __C'est plus clair ?__

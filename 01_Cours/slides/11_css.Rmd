@@ -11,7 +11,7 @@ names(tags)
 -----
 
 <div style="text-align:center" markdown="1">
-<img src="img/tags.png" alt="Drawing" style="width: 100%;">
+<img src="img/50_tags.png" alt="Drawing" style="width: 100%;">
 </div>
 
 C'est également possible de passer du code __HTML__ directement en utilisant la fonction du même nom :

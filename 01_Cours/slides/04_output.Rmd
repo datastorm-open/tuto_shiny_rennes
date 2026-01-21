@@ -3,7 +3,7 @@
 ## Outputs | Vue globale
 
 <div style="text-align:center" markdown="1">
-<img src="img/all_output.png" alt="Drawing" style="width: 100%;">
+<img src="img/25_all_output.png" alt="Drawing" style="width: 100%;">
 </div>
 
 ## Outputs | Les bonnes règles de construction

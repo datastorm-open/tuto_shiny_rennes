@@ -3,7 +3,7 @@
 ## Inputs | Vue globale
 
 <div style="text-align:center" markdown="1">
-<img src="img/all_input.png" alt="Drawing" style="width: 80%;">
+<img src="img/12_all_input.png" alt="Drawing" style="width: 80%;">
 </div>
 
 ## Inputs | Valeur numérique

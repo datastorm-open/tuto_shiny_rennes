@@ -41,7 +41,7 @@ __Shiny__ est un package __R__ qui permet la création simple d'applications web
 
 Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 
-![server](img/server_R.png)
+![server](img/01_server_R.png)
 
 
 # Ma première application avec shiny
@@ -58,13 +58,13 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 + arrêt : bouton __Stop__
 
 
-![run](img/run_app.png)
+![run](img/02_run_app.png)
 
 - __Run in Window__ : Nouvelle fenêtre, utilisant l'environnement __RStudio__
 - __Run in Viewer Pane__ : Dans l'onglet _Viewer_ de __RStudio__
 - __Run External__ : Dans le navigateur web par défaut
 
-![stop](img/stop.png)
+![stop](img/03_stop.png)
 
 # Structure d'une application
 
@@ -76,7 +76,7 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 - se terminant par la commande shinyApp()
 - pour les **applications légères**
 
-![Understand communication](img/single_app.png)
+![Understand communication](img/04_single_app.png)
 
 
 ```{r, eval = FALSE}
@@ -102,7 +102,7 @@ shinyApp(ui = ui, server = server)
 - côté serveur dans le script __server.R__
 - structure à **priviliégier**
 
-![Understand communication](img/dual_apps.png)
+![Understand communication](img/05_dual_apps.png)
 
 
 __ui.R__
@@ -130,7 +130,7 @@ function(input, output) {
 - le code __R__ tourne au niveau des scripts __R__, et peut donc accéder de façon relative à tous les objets présents dans le dossier de l'application
 - l'application web, comme de convention, accède à tous les éléments présents dans le dossier ``www`` (css, images, javascript, documentation, ...)
 
-![Understand communication](img/more_apps.png)
+![Understand communication](img/06_more_apps.png)
 
 
 # Intéractivité et communication
@@ -181,7 +181,7 @@ server <- function(input, output) {
 }
 ```
 
-![hello](img/hello_shiny.png)
+![hello](img/07_hello_shiny.png)
 
 Avec cette exemple simple, nous comprenons : 
 
@@ -191,7 +191,7 @@ Avec cette exemple simple, nous comprenons :
 
 ## Process
 
-![Understand communication](img/shiny_process.png)
+![Understand communication](img/08_shiny_process.png)
 
 
 __Le server et l'ui communiquent uniquement par le biais des inputs et des outputs__
@@ -218,14 +218,14 @@ __Deux types d'éléments dans le UI__
 * définit un élément qui permet une action de l'utilisateur
 * accessible côté serveur avec son identifiant __input$inputID__
 
-![Understand communication](img/xxInput.png)
+![Understand communication](img/09_xxInput.png)
 
 - xxOutput(ouputId = ...):
 
 * fait référence à un output créé et défini côté serveur
 * en général : graphiques et tableaux
 
-![Understand communication](img/xxOutput.png)
+![Understand communication](img/10_xxOutput.png)
 
 ## Serveur
 
@@ -235,11 +235,11 @@ __Définition des outputs dans le serveur__
 
 * calcule et retourne une sortie, dépendante d'inputs, via une expression __R__
 
-![Understand communication](img/renderXX.png)
+![Understand communication](img/11_renderXX.png)
 
 ## Retour sur le process
 
-![Understand communication](img/shiny_process.png)
+![Understand communication](img/08_shiny_process.png)
 
 __C'est plus clair ?__
 
@@ -259,7 +259,7 @@ __Le server et l'ui communiquent uniquement par le biais des inputs et des outpu
 
 ## Vue globale
 
-![Understand communication](img/all_input.png)
+![Understand communication](img/12_all_input.png)
 
 ## Valeur numérique
 
@@ -279,7 +279,7 @@ numericInput(inputId = "idNumeric", label = "Please select a number",
 # ("integer" when the parameter step is an integer value)
 ```
 
-![numeric](img/numeric.png)
+![numeric](img/13_numeric.png)
 
 ## Chaîne de caractères
 
@@ -296,7 +296,7 @@ textInput(inputId = "idText", label = "Enter a text", value = "")
 # For the server input$idText will be of class "character" 
 ```
 
-![text](img/text.png)
+![text](img/14_text.png)
 
 ## Liste de sélection
 
@@ -317,7 +317,7 @@ selectInput(inputId = "idSelect", label = "Select among the list: ", selected = 
 # (vector when the parameter "multiple" is TRUE)
 ```
 
-![us](img/unique_select.png)
+![us](img/15_unique_select.png)
 
 ## Checkbox
 
@@ -335,7 +335,7 @@ checkboxInput(inputId = "idCheck1", label = "Check ?")
 # For the server input$idCheck1 is of class "logical"
 ```
 
-![sc](img/logical.png)
+![sc](img/16_logical.png)
 
 ## Checkboxes multiple 
 
@@ -355,7 +355,7 @@ checkboxGroupInput(inputId = "idCheckGroup", label = "Please select", selected =
 # For the server input$idCheckGroup is a "character" vector
 ```
 
-![mc](img/multiple_checkbox.png)
+![mc](img/17_multiple_checkbox.png)
 
 ## Radio boutons
 
@@ -374,7 +374,7 @@ radioButtons(inputId = "idRadio", label = "Select one", selected = 3,
 # For the server input$idRadio is a "character"
 ```
 
-![rb](img/radio.png)
+![rb](img/18_radio.png)
 
 ## Date
 
@@ -394,7 +394,7 @@ dateInput(inputId = "idDate", label = "Please enter a date", value = "12/08/2015
 # For the server input$idDate is a "Date"
 ```
 
-![d](img/date.png)
+![d](img/19_date.png)
 
 ## Période
 
@@ -416,7 +416,7 @@ dateRangeInput(inputId = "idDateRange", label = "Please Select a date range",
 # For the server input$idDateRange is a vector of class "Date" with two elements
 ```
 
-![dr](img/date_range.png)
+![dr](img/20_date_range.png)
 
 ## Slider numérique : valeur unique
 
@@ -438,7 +438,7 @@ sliderInput(inputId = "idSlider1", label = "Select a number", min = 0, max = 10,
 # (integer when the parameter "step" is an integer too)
 ```
 
-![sl](img/slider.png)
+![sl](img/21_slider.png)
 
 ## Slider numérique : range
 
@@ -460,7 +460,7 @@ sliderInput(inputId = "idSlider2", label = "Select a number", min = 0, max = 10,
 # (integer when the parameter "step" is an integer too)
 ```
 
-![msl](img/multiple_slider.png)
+![msl](img/22_multiple_slider.png)
 
 ## Importer un fichier
 
@@ -479,7 +479,7 @@ fileInput(inputId = "idFile", label = "Select a file")
 # (name, size, type and datapath) and one row
 ```
 
-![up](img/file.png)
+![up](img/23_file.png)
 
 ## Action Bouton
 
@@ -498,7 +498,7 @@ actionButton(inputId = "idActionButton", label = "Click !",
 # For the server input$idActionButton is an "integer"
 ```
 
-![ab](img/action.png)
+![ab](img/24_action.png)
 
 ## Aller plus loin : construire son propre input
 
@@ -516,7 +516,7 @@ Ainsi que deux applications d'exemples :
 
 ## Vue globale
 
-![ab](img/all_output.png)
+![ab](img/25_all_output.png)
 
 ## Les bonnes règles de construction
 
@@ -549,7 +549,7 @@ output$texte <- renderPrint({
 })
 ```
 
-![op](img/otext.png)
+![op](img/26_otext.png)
 
 ## Text
 
@@ -567,7 +567,7 @@ output$texte <- renderText({
 })
 ```
 
-![op2](img/otext2.png)
+![op2](img/27_otext2.png)
 
 ### Plot
 
@@ -585,7 +585,7 @@ output$myplot <- renderPlot({
 })
 ```
 
-![op3](img/oplot.png)
+![op3](img/28_oplot.png)
 
 ## Table
 
@@ -601,7 +601,7 @@ tableOutput(outputId = "table")
 output$table <- renderTable({iris})
 ```
 
-![op4](img/otable.png)
+![op4](img/29_otable.png)
 
 ## DataTable
 
@@ -619,7 +619,7 @@ output$dataTable <- DT::renderDT({
 })
 ```
 
-![op5](img/odatable.png)
+![op5](img/30_odatable.png)
 
 ## Définir des élements de l'UI côté SERVER | Définition
 
@@ -640,7 +640,7 @@ output$columns <- renderUI({
 })
 ```
 
-![op5](img/ui_output.png)
+![op5](img/31_ui_output.png)
 
 ## Définir des élements de l'UI côté SERVER | Exemple plus complexe
 
@@ -691,7 +691,7 @@ fluidPage(
 ```
 
 
-![sdb](img/sidabar.png)
+![sdb](img/32_sidabar.png)
 
 ## wellPanel
 
@@ -709,7 +709,7 @@ fluidPage(
 ```
 
 
-![sdb](img/wellPanel.png)
+![sdb](img/33_wellPanel.png)
 
 ## navbarPage
 
@@ -748,7 +748,7 @@ fluidPage(
 )
 ```
 
-![nav](img/navbar.png)
+![nav](img/34_navbar.png)
 
 ## tabsetPanel
 
@@ -770,7 +770,7 @@ fluidPage(
 )
 ```
 
-![pan](img/tabpanel.png)
+![pan](img/35_tabpanel.png)
 
 ## navlistPanel
 
@@ -786,7 +786,7 @@ fluidPage(
 )
 ```
 
-![pan](img/navList.png)
+![pan](img/36_navList.png)
 
 ## Grid Layout
 
@@ -809,13 +809,13 @@ tabPanel(title = "Summary",
 ```
 
 
-![grid](img/grid.png)
+![grid](img/37_grid.png)
 
 ## shinydashboard
 
 Le package [shinydashboard](https://rstudio.github.io/shinydashboard/) propose d'autres fonctions pour créer des tableaux de bords :
 
-![grid](img/dash.png)
+![grid](img/38_dash.png)
 
 <https://rstudio.github.io/shinydashboard/>
 
@@ -823,7 +823,7 @@ Le package [shinydashboard](https://rstudio.github.io/shinydashboard/) propose d
 
 Toutes les structures peuvent s'utiliser en même temps !
 
-![grid](img/struct.png)
+![grid](img/39_struct.png)
 
 # Graphiques intéractifs
 
@@ -877,15 +877,15 @@ visNetwork(nodes, edges) %>%
 
 <https://shiny.rstudio.com/articles/js-send-message.html>
 
-![dyg](img/dygraphs.png)
+![dyg](img/40_dygraphs.png)
 
-![leaf](img/leaflet.png)
+![leaf](img/41_leaflet.png)
 
-![ram](img/ramcharts.png)
+![ram](img/42_ramcharts.png)
 
-![vis](img/visnetwork.png)
+![vis](img/43_visnetwork.png)
 
-![ggv](img/ggvis.png)
+![ggv](img/44_ggvis.png)
 
 
 # Isolation
@@ -940,7 +940,7 @@ function(input, output) {
 
 L'histogramme sera donc mis-à-jour quand l'utilisateur cliquera sur le bouton.
 
-![iso](img/isolation.png)
+![iso](img/45_isolation.png)
 
 
 ## Exemple 2
@@ -1054,7 +1054,7 @@ server = function(input, output) {
 ```
 
 
-![](img/RV.png)
+![](img/46_RV.png)
 
 # Conditional panels
 
@@ -1097,7 +1097,7 @@ shinyApp(
 )
 ```
 
-![cond1](img/cond1.png)
+![cond1](img/47_cond1.png)
 
 
 # Observe & fonctions d'update
@@ -1174,9 +1174,9 @@ function(input, output, session) {
 }
 ```
 
-![obs1](img/observer1.png)
+![obs1](img/48_observer1.png)
 
-![obs2](img/observer2.png)
+![obs2](img/49_observer2.png)
 
 
 ##  Exemple sur des onglets 
@@ -1240,7 +1240,7 @@ names(shiny::tags)
 ```
 
 
-![grid](img/tags.png)
+![grid](img/50_tags.png)
 
 C'est également possible de passer du code __HTML__ directement en utilisant la fonction du même nom :
 
@@ -1293,7 +1293,7 @@ ui <- fluidPage(theme = "mytheme.css",
 ```
 
 
-![css1](img/css1.png)
+![css1](img/51_css1.png)
 
 ## Ajout de css dans le header
 
@@ -1310,7 +1310,7 @@ tags$head(
 )
 ```
 
-![css2](img/css2.png)
+![css2](img/52_css2.png)
 
 ## CSS sur un élément
 
@@ -1323,7 +1323,7 @@ h1("Mon titre", style = "color: #48ca3b;")
 )
 ```
 
-![css3](img/css3.png)
+![css3](img/53_css3.png)
 
 # Quelques bonnes pratiques
 
@@ -1365,7 +1365,7 @@ output$distPlot <- renderPlot({
 ```
 
 
-![ggv](img/debug_cat.png)
+![ggv](img/54_debug_cat.png)
 
 ## Lancement manuel d'un browser
 
@@ -1383,7 +1383,7 @@ output$distPlot <- renderPlot({
 - Ne pas oublier de l'enlever une fois le développement terminé...!
 
 
-![ggv](img/debug_browser.png)
+![ggv](img/55_debug_browser.png)
 
 ## Lancement automatique d'un browser
 
@@ -1402,7 +1402,7 @@ on peut observer en direct l'éxécution du code :
 runApp("path/to/myapp", display.mode="showcase")
 ```
 
-![ggv](img/debug_showcase.png)
+![ggv](img/56_debug_showcase.png)
 
 ## Reactive log
 
@@ -1421,7 +1421,7 @@ output$distPlot <- renderPlot({
 ```
 
 
-![ggv](img/debug_log.png)
+![ggv](img/57_debug_log.png)
 
 ## Communication client/server
 
@@ -1431,7 +1431,7 @@ output$distPlot <- renderPlot({
 options(shiny.trace = TRUE) 
 ```
 
-![ggv](img/debug_trace.png)
+![ggv](img/58_debug_trace.png)
 
 ## Traçage des erreurs
 
@@ -1443,7 +1443,7 @@ options(shiny.trace = TRUE)
 options(shiny.fullstacktrace = TRUE)
 ```
 
-![ggv](img/debug_stack.png)
+![ggv](img/59_debug_stack.png)
 
 ## Références / Tutoriaux / Exemples
 

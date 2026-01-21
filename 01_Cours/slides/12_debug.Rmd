@@ -17,7 +17,7 @@
 ## Débogage | Affichage console
 
 <div style="text-align:center" markdown="1">
-<img src="img/debug_cat.png" alt="Drawing" style="width: 90%;">
+<img src="img/54_debug_cat.png" alt="Drawing" style="width: 90%;">
 </div>
 
 ## Débogage | Lancement manuel d'un browser
@@ -39,7 +39,7 @@
 ## Débogage | Lancement manuel d'un browser
 
 <div style="text-align:center" markdown="1">
-<img src="img/debug_browser.png" alt="Drawing" style="width: 90%;">
+<img src="img/55_debug_browser.png" alt="Drawing" style="width: 90%;">
 </div>
 
 ## Débogage | Lancement automatique d'un browser
@@ -63,7 +63,7 @@ runApp("path/to/myapp", display.mode="showcase")
 ## Débogage | Mode "showcase"
 
 <div style="text-align:center" markdown="1">
-<img src="img/debug_showcase.png" alt="Drawing" style="width: 90%;">
+<img src="img/56_debug_showcase.png" alt="Drawing" style="width: 90%;">
 </div>
 
 ## Débogage | Reactive log
@@ -85,7 +85,7 @@ output$distPlot <- renderPlot({
 ## Débogage | Reactive log
 
 <div style="text-align:center" markdown="1">
-<img src="img/debug_log.png" alt="Drawing" style="width: 90%;">
+<img src="img/57_debug_log.png" alt="Drawing" style="width: 90%;">
 </div>
 
 ## Débogage | Communication client/server
@@ -100,7 +100,7 @@ options(shiny.trace = TRUE)
 ## Débogage | Communication client/server
 
 <div style="text-align:center" markdown="1">
-<img src="img/debug_trace.png" alt="Drawing" style="width: 90%;">
+<img src="img/58_debug_trace.png" alt="Drawing" style="width: 90%;">
 </div>
 
 ## Débogage | Traçage des erreurs
@@ -117,5 +117,5 @@ options(shiny.fullstacktrace = TRUE)
 ## Débogage | Traçage des erreurs
 
 <div style="text-align:center" markdown="1">
-<img src="img/debug_stack.png" alt="Drawing" style="width: 90%;">
+<img src="img/59_debug_stack.png" alt="Drawing" style="width: 90%;">
 </div>

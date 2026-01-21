@@ -9,7 +9,7 @@
 - pour les **applications légères**
 
 <div style="text-align:center" markdown="1">
-<img src="img/single_app.png" alt="Drawing" style="width: 60%;">
+<img src="img/04_single_app.png" alt="Drawing" style="width: 60%;">
 </div>
 
 ## Structure d'une application | Un dossier avec un seul fichier
@@ -38,7 +38,7 @@ shinyApp(ui = ui, server = server)
 - structure à **priviliégier**
 
 <div style="text-align:center" markdown="1">
-<img src="img/dual_apps.png" alt="Drawing" style="width: 60%;">
+<img src="img/05_dual_apps.png" alt="Drawing" style="width: 60%;">
 </div>
 
 ## Structure d'une application | Un dossier avec deux fichiers
@@ -68,5 +68,5 @@ function(input, output) {
 - l'application web, comme de convention, accède à tous les éléments présents dans le dossier ``www`` (css, images, javascript, documentation, ...)
 
 <div style="text-align:center" markdown="1">
-<img src="img/more_apps.png" alt="Drawing" style="width: 70%;">
+<img src="img/06_more_apps.png" alt="Drawing" style="width: 70%;">
 </div>
