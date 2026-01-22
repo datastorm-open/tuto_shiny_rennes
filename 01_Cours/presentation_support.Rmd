@@ -2,6 +2,14 @@
 title: "Premiers pas avec shiny... et les packages de visualisation interactive"
 author: "B.Thieurmel, benoit.thieurmel@datastorm.fr"
 output:
+  word_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    fig_caption: no
+    theme: journal
+    toc: yes
+    toc_depth: 2
   pdf_document:
     fig_caption: no
     fig_crop: no
@@ -12,12 +20,7 @@ output:
     number_sections: yes
     toc: yes
     toc_depth: 2
-  html_document:
-    fig_caption: no
-    theme: journal
-    toc: yes
-    toc_depth: 2
-header-includes: 
+header-includes:
 - \usepackage{graphicx}
 - \usepackage{float}
 ---
@@ -834,7 +837,6 @@ Avec notamment l'arrivée du package [htmlwidgets](http://www.htmlwidgets.org/),
 * [Leafet (maps)](http://rstudio.github.io/leaflet/)
 * [d3heatmap](https://github.com/rstudio/d3heatmap)
 * [threejs (3d scatter & globe)](http://bwlewis.github.io/rthreejs)
-* [rAmCharts](http://datastorm-open.github.io/introduction_ramcharts/)
 * [visNetwork](http://datastorm-open.github.io/visNetwork)
 * ...
 
@@ -881,12 +883,7 @@ visNetwork(nodes, edges) %>%
 
 ![leaf](img/41_leaflet.png)
 
-![ram](img/42_ramcharts.png)
-
 ![vis](img/43_visnetwork.png)
-
-![ggv](img/44_ggvis.png)
-
 
 # Isolation
 
