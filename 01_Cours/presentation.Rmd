@@ -25,10 +25,10 @@ runtime: shiny
 
 __Shiny__ est un package __R__ qui permet la création simple d'applications web intéractives depuis le logiciel open-source __R__.
 
-- pas de connaissances _web_ nécessaires
-- le pouvoir de calcul de R et l'intéractivité du web actuel
-- pour créer des applications locales
-- ou partagées avec l'utilisation de __shiny-server__, __shinyapps.io__, __shinyproxy__
+- Pas de connaissances _web_ nécessaires
+- Le pouvoir de calcul de R et l'intéractivité du web actuel
+- Pour créer des applications locales
+- ... ou partagées avec l'utilisation de __shiny-server__, __shinyapps.io__, __shinyproxy__
 
 <http://shiny.rstudio.com>
 
@@ -50,14 +50,14 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 
 - Initialiser une application est simple avec __RStudio__, en créant un nouveau projet
 
-    * File > New File > Shiny Web App (Multiple File)
-    * Basée sur deux scripts : ui.R et server.R
-    * Et utilisant par défaut le sidebar layout
+    * File > New Project > New Directory > Shiny Application
+    * Divisée en deux parties : ui.R et server.R
+    * Et utilisant par défaut la mise en page "sidebar layout"
 
 - Commandes utiles :
-    + lancement de l'application : bouton __Run app__
-    + actualisatisation : bouton __Reload app__
-    + arrêt : bouton __Stop__
+    + Lancement de l'application : bouton __Run app__
+    + Actualisatisation : bouton __Reload app__
+    + Arrêt : bouton __Stop__
 
 
 ----
