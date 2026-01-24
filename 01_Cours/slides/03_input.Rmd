@@ -514,6 +514,23 @@ server = function(input, output) {
 )
 ```
 
+
+## <span style="color:#2B7FFF;">Ce qu'il faut retenir</span>
+
+- <span style="color:#57534D;">Convention de nommage : `<type>_Input(...)`, avec une exception notable pour l'`actionButton(...)`</span>
+
+- <span style="color:#57534D;">Les identifiants des inputs (*inputId*) doivent toujours être uniques : `<type>Input(`*`inputId="id_input_01", ...`*`)`</span>
+
+- <span style="color:#57534D;">Les inputs sont créés dans la partie</span> ui.R<span style="color:#57534D;">.</span>
+
+- <span style="color:#57534D;">Une fois initialisé, la valeur actuelle de l'input peut être récupérée côté</span> server.R <span style="color:#57534D;">via la variable **`input`**. Par exemple :</span> 
+
+  - `val <`**`- input`**`$id_input_01` <span style="color:#57534D;">,  ou</span> 
+  - `val <`**`- input`**`[["id_input_01"]]`
+  
+- <span style="color:#57534D;">Donnez des _id_ parlants à vos inputs pour faciliter le débogage !</span> 
+
+
 ## <span style="color:#FB2C36;">Pour aller plus loin : construire son propre input</span>
 
 <span style="color:#57534D;">__Avec un peu de compétences en HTML/CSS/JavaScript, il est également possible de construire des inputs personnalisés__</span>
