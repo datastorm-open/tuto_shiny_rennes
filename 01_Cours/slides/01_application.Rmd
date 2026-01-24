@@ -2,11 +2,11 @@
 
 ## Structure d'une application | Un dossier avec un seul fichier
 
-**conventions :**
+**Conventions :**
 
-- enregistré sous le nom __app.R__
-- se terminant par la commande shinyApp()
-- pour les **applications légères**
+- Enregistré sous le nom __app.R__
+- Se terminant par la commande shinyApp()
+- Pour les **applications légères**
 
 <div style="text-align:center" markdown="1">
 <img src="img/04_single_app.png" alt="Drawing" style="width: 60%;">
@@ -31,11 +31,11 @@ shinyApp(ui = ui, server = server)
 
 ## Structure d'une application | Un dossier avec deux fichiers
 
-**conventions :**
+**Conventions :**
 
-- côté interface utilisateur dans le script __ui.R__
-- côté serveur dans le script __server.R__
-- structure à **priviliégier**
+- Côté interface utilisateur dans le script __ui.R__
+- Côté serveur dans le script __server.R__
+- Structure à **priviliégier**
 
 <div style="text-align:center" markdown="1">
 <img src="img/05_dual_apps.png" alt="Drawing" style="width: 60%;">
@@ -62,10 +62,10 @@ function(input, output) {
 ```
 
 
-## Structure d'une application | données/fichiers complémentaires
+## Structure d'une application | Données/fichiers complémentaires
 
-- le code __R__ tourne au niveau des scripts __R__, et peut donc accéder de façon relative à tous les objets présents dans le dossier de l'application
-- l'application web, comme de convention, accède à tous les éléments présents dans le dossier ``www`` (css, images, javascript, documentation, ...)
+- Le code __R__ tourne au niveau des scripts __R__, et peut donc accéder de façon relative à tous les objets présents dans le dossier de l'application
+- L'application web, comme de convention, accède à tous les éléments présents dans le dossier ``www`` (css, images, javascript, documentation, ...)
 
 <div style="text-align:center" markdown="1">
 <img src="img/06_more_apps.png" alt="Drawing" style="width: 70%;">
