@@ -2,14 +2,6 @@
 title: "Premiers pas avec shiny... et les packages de visualisation interactive"
 author: "B.Thieurmel, benoit.thieurmel@datastorm.fr"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '2'
-  html_document:
-    fig_caption: no
-    theme: journal
-    toc: yes
-    toc_depth: 2
   pdf_document:
     fig_caption: no
     fig_crop: no
@@ -20,6 +12,14 @@ output:
     number_sections: yes
     toc: yes
     toc_depth: 2
+  html_document:
+    fig_caption: no
+    theme: journal
+    toc: yes
+    toc_depth: 2
+  word_document:
+    toc: yes
+    toc_depth: '2'
 header-includes:
 - \usepackage{graphicx}
 - \usepackage{float}
@@ -503,7 +503,7 @@ actionButton(inputId = "idActionButton", label = "Click !",
 
 ![ab](img/24_action.png)
 
-## Aller plus loin : construire son propre input
+## Pour aller plus loin : construire son propre input
 
 __Avec un peu de compétences en HTML/CSS/JavaScript, il est également possible de construire des inputs personnalisés__
 
@@ -665,7 +665,7 @@ output$fluidRow_ui <- renderUI(
 )
 ```
 
-## Aller plus loin : construire son propre output
+Pour aller plus loin : construire son propre output
 
 __Avec un peu de compétences en HTML/CSS/JavaScript, il est également possible de construire des outputs personnalisés__
 
@@ -1114,7 +1114,6 @@ shinyApp(
 ```{r, echo = TRUE, eval = FALSE}
 server <- function(input, output, session) {...}
 ```
-
 
 Sur des inputs :
 

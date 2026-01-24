@@ -1,4 +1,4 @@
-# Pour aller plus loin : HTML / CSS
+# <span style="color:#FB2C36;">Pour aller plus loin : HTML & CSS</span>
 
 ## HTML / CSS | __Inclure du HTML__
 

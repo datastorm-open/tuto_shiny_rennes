@@ -514,13 +514,17 @@ server = function(input, output) {
 )
 ```
 
-## Inputs | Aller plus loin : construire son propre input
+## <span style="color:#FB2C36;">Pour aller plus loin : construire son propre input</span>
 
-__Avec un peu de compétences en HTML/CSS/JavaScript, il est également possible de construire des inputs personnalisés__
+<span style="color:#57534D;">__Avec un peu de compétences en HTML/CSS/JavaScript, il est également possible de construire des inputs personnalisés__</span>
 
-Un tutoriel est disponible : [http://shiny.rstudio.com/articles/building-inputs.html](http://shiny.rstudio.com/articles/building-inputs.html)
+<div style="height: 30px;"></div>
 
-Ainsi que deux applications d'exemples : 
+<span style="color:#57534D;">Un tutoriel est disponible :</span> [http://shiny.rstudio.com/articles/building-inputs.html](http://shiny.rstudio.com/articles/building-inputs.html)
+
+<div style="height: 30px;"></div>
+
+<span style="color:#57534D;">Ainsi que deux applications d'exemples : </span>
 
 - [http://shiny.rstudio.com/gallery/custom-input-control.html](http://shiny.rstudio.com/gallery/custom-input-control.html)
 

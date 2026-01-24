@@ -1,5 +1,5 @@
 ---
-title: "Premiers pas avec shiny... et les packages de visualisation interactive"
+title: "Premiers pas avec R Shiny... et les packages de visualisation interactive"
 author: "B.Thieurmel, benoit.thieurmel@datastorm.fr"
 output:
   ioslides_presentation:
@@ -21,7 +21,7 @@ runtime: shiny
 7. HTML / CSS
 8. Pour aller plus loin
 
-## Shiny : créer des applications web avec le logiciel R
+## Shiny : créer des applications web avec R
 
 __Shiny__ est un package __R__ qui permet la création simple d'applications web intéractives depuis le logiciel open-source __R__.
 
@@ -109,16 +109,16 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 ```{r child = 'slides/11_css.Rmd'}
 ```
 
-# Pour aller plus loin : quelques bonnes pratiques
+# Pour terminer : quelques bonnes pratiques
 
-## Quelques bonnes pratiques
+## <span style="color:#31C950;">Quelques bonnes pratiques</span>
 
 - Préférer l'underscore (_) au point (.) comme séparateur dans le nom des variables. En effet, le **.** peut amener de mauvaises intérations avec d'autres langages, comme le __JavaScript__
 - Faire bien attention à __l'unicité des différents identifiants__ des inputs/outputs
 - Pour éviter des problèmes éventuels avec __des versions différentes de packages__, et notamment dans le cas de __plusieurs applications shiny__ et/ou différents environnements de travail, essayer d'utiliser [packrat](https://rstudio.github.io/packrat/)
 - Mettre toute la __partie "calcul"__ dans des __fonctions/un package__ et effectuer des tests ([testthat](http://r-pkgs.had.co.nz/tests.html))
 
-## Quelques bonnes pratiques
+## <span style="color:#31C950;">Quelques bonnes pratiques</span>
 
 - Diviser la partie __ui.R__ et __server.R__ en plusieurs scripts, un par onglet par exemple :
 

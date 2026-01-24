@@ -215,10 +215,14 @@ output$fluidRow_ui <- renderUI(fluidRow(
 ))
 ```
 
-## Outputs | Aller plus loin : construire son propre output
+## <span style="color:#FB2C36;">Pour aller plus loin : construire son propre output</span>
 
-__Avec un peu de compétences en HTML/CSS/JavaScript, il est également possible de construire des outputs personnalisés__
+<span style="color:#57534D;">__Avec un peu de compétences en HTML/CSS/JavaScript, il est également possible de construire des outputs personnalisés__</span>
 
-Un tutoriel est disponible : [http://shiny.rstudio.com/articles/building-outputs.html](http://shiny.rstudio.com/articles/building-outputs.html)
+<div style="height: 30px;"></div>
 
-On peut donc par exemple ajouter comme output un graphique construit avec la librairie [d3.js](https://d3js.org/). Un exemple est disponible dans le dossier ``shinyApps/build_output``.
+<span style="color:#57534D;">Un tutoriel est disponible :</span> [http://shiny.rstudio.com/articles/building-outputs.html](http://shiny.rstudio.com/articles/building-outputs.html)
+
+<div style="height: 30px;"></div>
+
+<span style="color:#57534D;">On peut donc par exemple ajouter comme output un graphique construit avec la librairie [d3.js](https://d3js.org/). Un exemple est disponible dans le dossier ``shinyApps/build_output``.</span>

@@ -1,4 +1,4 @@
-# Pour aller plus loin : observe & fonctions d'update
+# <span style="color:#FB2C36;">Pour aller plus loin : les observe et fonctions d'update</span>
 
 ## Observe & fonctions d'update
 

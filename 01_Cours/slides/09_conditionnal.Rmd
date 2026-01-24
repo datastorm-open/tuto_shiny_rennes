@@ -1,4 +1,4 @@
-# Pour aller plus loin : Conditional panels
+# <span style="color:#FB2C36;">Pour aller plus loin : les conditional panels</span>
 
 ## Conditional panels | Définition
 

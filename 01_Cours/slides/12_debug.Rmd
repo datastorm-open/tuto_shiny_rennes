@@ -1,4 +1,4 @@
-# Pour aller plus loin : débogage
+# <span style="color:#FB2C36;">Pour aller plus loin : techniques de débodage</span>
 
 ## Débogage | Affichage console
 
