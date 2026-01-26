@@ -1,4 +1,3 @@
-
 # Define UI for application that draws a histogram
 fluidPage(
   # navbarPage
@@ -34,19 +33,20 @@ fluidPage(
                                  textInput(inputId = "titre", label = "Titre :", value = "Histogramme"),
                                  
                                  # selection de la colonne
-                                 radioButtons(inputId = "var", label = "Variable : ", choices = colnames(faithful))
+                                 radioButtons(inputId = "var", label = "Variable : ", 
+                                              choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
                                )
                         ), 
                         # deuxieme colonne
                         column(width = 9, 
                                tabsetPanel(
                                  tabPanel("Histogramme", 
-                                          # plotOutput -> amChartsOutput
-                                          amChartsOutput("distPlot"),
+                                          # plotOutput -> plotlyOutput
+                                          plotlyOutput("distPlot"),
                                           # classes (div centrée)
                                           div(textOutput("n_bins"), align = "center")
                                  ),
-                                 tabPanel("Boxplot", amChartsOutput("boxplot"))
+                                 tabPanel("Boxplot", plotlyOutput("boxplot"))
                                )
                         )
                       )

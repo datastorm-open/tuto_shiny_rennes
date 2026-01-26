@@ -1,33 +1,33 @@
 # Define server logic required to draw a histogram
 function(input, output) {
    
-  # renderPlot <- renderAmCharts
-  # output$distPlot <- renderAmCharts({
-  #   
-  #   # generate bins based on input$bins from ui.R
-  #   x    <- faithful[, input$var] 
-  #   bins <- round(seq(min(x), max(x), length.out = input$bins + 1), 2)
-  #   
-  #   # use amHist
-  #   amHist(x = x, control_hist = list(breaks = bins), 
-  #          col = input$color, main = input$titre, 
-  #          export = TRUE, zoom = TRUE)
-  # })
+  # renderPlot <- renderPlotly
+  output$distPlot <- renderPlotly({
+
+    # generate bins based on input$bins from ui.R
+    x    <- iris[, input$var]
+    bins <- round(seq(min(x), max(x), length.out = input$bins + 1), 2)
+
+    # use plot_ly
+    plot_ly(x = x, type = "histogram", nbinsx = bins, color = I(input$color)) %>%
+      layout(title = input$titre)
+  })
   
-  # renderPlot <- renderAmCharts
-  output$boxplot <- renderAmCharts({
-    x <- faithful[, input$var] 
-    amBoxplot(x, col = input$color, main = "Boxplot", export = TRUE, zoom = TRUE)
+  # renderPlot <- renderPlotly
+  output$boxplot <- renderPlotly({
+    x <- iris[, input$var]
+    plot_ly(y = ~x, x=~Species, type = "box", data = iris, color = I(input$color), name = input$var, boxmean = "sd") %>%
+      layout(title = list(text = "Boxplot", font = list(color = "orange", size = 18)))
   })
   
   # summary
   output$summary <- renderPrint({
-    summary(faithful)
+    summary(iris)
   })
   
   # table
   output$table <- DT::renderDT({
-    faithful
+    iris
   })
   
   # nombre de classe
