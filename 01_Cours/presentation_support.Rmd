@@ -607,18 +607,20 @@ output$texte <- renderText({
 - __ui.r__: 
 
 ```{r, echo = TRUE, eval = FALSE}
-plotOutput("myplot")
+plotOutput("plot_iris")
 ```
 
 - __server.r__:
 
 ```{r, echo = TRUE, eval = FALSE}
 output$myplot <- renderPlot({
-  hist(iris$Sepal.Length)
+  plot(x = iris$Sepal.Length, y = iris$Sepal.Width, 
+       col = iris$Species, pch = 20,
+       xlab = "Sepal length", ylab = "Sepal width")
 })
 ```
 
-![op3](img/28_oplot.png)
+![op3](img/28_plot_iris.png)
 
 ## Table
 
