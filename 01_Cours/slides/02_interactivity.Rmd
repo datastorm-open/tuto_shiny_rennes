@@ -45,29 +45,31 @@ shinyApp(
 <img src="img/08_shiny_process.png" alt="Drawing" style="width: 90%;">
 </div>
 
-__Le server et l'ui communiquent uniquement par le biais des inputs et des outputs__
+__Le serveur et l'UI communiquent uniquement par le biais des inputs et des outputs__
 
-__Par défaut, un output est mis-à-jour chaque fois qu'un input en lien change__
+__Par défaut, un output est mis à jour chaque fois qu'un input en lien change__
 
 ## Intéractivité et communication | Notice
 
-__la définition de l'interface utilisateur : UI__
+__L'interface utilisateur (UI, frontend) sert à__
 
-- la déclaration des inputs
-- la structure de la page, avec le placement des outputs
+- Structurer la page : ajout d'une sidebar, d'onglets, position des éléments, ... 
+- Déclarer et placer les inputs
+- Placer les outputs
 
-__la partie serveur/calculs : SERVER__
+__La partie serveur (backend) sert à__
 
-- la déclaration et le calcul des outputs
+- Déclarer et calculer les outputs
+- Réaliser les opérations déclenchées par l'intéraction avec les différents inputs et outputs
 
 ## Intéractivité et communication | UI
 
-__Deux types d'éléments dans le UI__
+__La partie UI contient 2 types d'éléments__
 
-- xxInput(inputId = ..., ...):
+- Les inputs : `<type>Input(inputId = id_input, ...)` :
 
-    * définit un élément qui permet une action de l'utilisateur
-    * accessible côté serveur avec son identifiant __input$inputID__
+    * Définit un élément qui permet une action de l'utilisateur
+    * Accessible côté serveur via la variable __input__ : `input$id_input`
 
 <div style="text-align:center" markdown="1">
 <img src="img/09_xxInput.png" alt="Drawing" style="width: 65%;">
@@ -75,10 +77,10 @@ __Deux types d'éléments dans le UI__
 
 ## Intéractivité et communication | UI
 
-- xxOutput(ouputId = ...):
+- Les outputs : `<type>Output(ouputId = id_output)` :
 
-    * fait référence à un output créé et défini côté serveur
-    * en général : graphiques et tableaux
+    * Fait référence à un output __créé et défini côté serveur__
+    * En général : graphiques et tableaux
 
 <div style="text-align:center" markdown="1">
 <img src="img/10_xxOutput.png" alt="Drawing" style="width: 70%;">
@@ -86,11 +88,13 @@ __Deux types d'éléments dans le UI__
 
 ## Intéractivité et communication | Serveur
 
-__Définition des outputs dans le serveur__
+__Définition des outputs dans la partie serveur__
 
-- renderXX({expr}):
+- `output$id_output <- render<Type>({expr})`:
 
-    * calcule et retourne une sortie, dépendante d'inputs, via une expression __R__
+    * On déclare l'output dans la variable __output__ via son identifiant
+    * Une fois déclaré, il pourra être placé dans l'UI via la commande `typeOutput(outputId = "id_output")`
+    * Evalue le code __R__ contenu dans l'expression et retourne la sortie
 
 <div style="text-align:center" markdown="1">
 <img src="img/11_renderXX.png" alt="Drawing" style="width: 70%;">
@@ -106,9 +110,9 @@ __C'est plus clair ?__
 
 ## Intéractivité et communication | Partage ui <-> server
 
-__Le server et l'ui communiquent uniquement par le biais des inputs et des outputs__
+Le serveur et l'UI communiquent __uniquement par le biais des inputs et des outputs__
 
-- Nous pouvons ajouter un script nommé **global.R** pour partager des éléments (variables,  packages, ...) entre la partie __UI__ et la partie __SERVER__ 
+- Un script **global.R** peut compléter le **ui.R** et le **server.R** pour partager des éléments entre la partie __UI__ et la partie __serveur__, par exemple au chargement de l'application (packages, tables)
 
 - Tout ce qui est présent dans le **global.R** est visible à la fois dans le __ui.R__ et dans le __server.R__
 

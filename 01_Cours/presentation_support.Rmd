@@ -73,11 +73,11 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 
 ## Un dossier avec un seul fichier
 
-**conventions :**
+**Conventions :**
 
-- enregistré sous le nom __app.R__
-- se terminant par la commande shinyApp()
-- pour les **applications légères**
+- Enregistré sous le nom __app.R__
+- Se terminant par la commande shinyApp()
+- Pour les **applications légères**
 
 ![Understand communication](img/04_single_app.png)
 
@@ -99,11 +99,11 @@ shinyApp(ui = ui, server = server)
 
 ## Un dossier avec deux fichiers
 
-**conventions :**
+**Conventions :**
 
-- côté interface utilisateur dans le script __ui.R__
-- côté serveur dans le script __server.R__
-- structure à **priviliégier**
+- Côté interface utilisateur dans le script __ui.R__
+- Côté serveur dans le script __server.R__
+- Structure à **priviliégier**
 
 ![Understand communication](img/05_dual_apps.png)
 
@@ -130,8 +130,8 @@ function(input, output) {
 
 ## Données/fichiers complémentaires
 
-- le code __R__ tourne au niveau des scripts __R__, et peut donc accéder de façon relative à tous les objets présents dans le dossier de l'application
-- l'application web, comme de convention, accède à tous les éléments présents dans le dossier ``www`` (css, images, javascript, documentation, ...)
+- Le code __R__ tourne au niveau des scripts __R__, et peut donc accéder de façon relative à tous les objets présents dans le dossier de l'application
+- L'application web, comme de convention, accède à tous les éléments présents dans le dossier ``www`` (css, images, javascript, documentation, ...)
 
 ![Understand communication](img/06_more_apps.png)
 
@@ -197,46 +197,52 @@ Avec cette exemple simple, nous comprenons :
 ![Understand communication](img/08_shiny_process.png)
 
 
-__Le server et l'ui communiquent uniquement par le biais des inputs et des outputs__
+__Le serveur et l'UI communiquent uniquement par le biais des inputs et des outputs__
 
-__Par défaut, un output est mis-à-jour chaque fois qu'un input en lien change__
+__Par défaut, un output est mis à jour chaque fois qu'un input en lien change__
 
 ## Notice
 
-__la définition de l'interface utilisateur : UI__
+__L'interface utilisateur (UI, frontend) sert à__
 
-- la déclaration des inputs
-- la structure de la page, avec le placement des outputs
+- Structurer la page : ajout d'une sidebar, d'onglets, position des éléments, ... 
+- Déclarer et placer les inputs
+- Placer les outputs
 
-__la partie serveur/calculs : SERVER__
+__La partie serveur (backend) sert à__
 
-- la déclaration et le calcul des outputs
+- Déclarer et calculer les outputs
+- Réaliser les opérations déclenchées par l'intéraction avec les différents inputs et outputs
 
 ## UI 
 
 __Deux types d'éléments dans le UI__
 
-- xxInput(inputId = ..., ...):
+__La partie UI contient 2 types d'éléments__
 
-* définit un élément qui permet une action de l'utilisateur
-* accessible côté serveur avec son identifiant __input$inputID__
+- Les inputs : `<type>Input(inputId = id_input, ...)` :
+
+    * Définit un élément qui permet une action de l'utilisateur
+    * Accessible côté serveur via la variable __input__ : `input$id_input`
 
 ![Understand communication](img/09_xxInput.png)
 
-- xxOutput(ouputId = ...):
+- Les outputs : `<type>Output(ouputId = id_output)` :
 
-* fait référence à un output créé et défini côté serveur
-* en général : graphiques et tableaux
+    * Fait référence à un output __créé et défini côté serveur__
+    * En général : graphiques et tableaux
 
 ![Understand communication](img/10_xxOutput.png)
 
 ## Serveur
 
-__Définition des outputs dans le serveur__
+__Définition des outputs dans la partie serveur__
 
-- renderXX({expr}):
+- `output$id_output <- render<Type>({expr})`:
 
-* calcule et retourne une sortie, dépendante d'inputs, via une expression __R__
+    * On déclare l'output dans la variable __output__ via son identifiant
+    * Une fois déclaré, il pourra être placé dans l'UI via la commande `typeOutput(outputId = "id_output")`
+    * Evalue le code __R__ contenu dans l'expression et retourne la sortie
 
 ![Understand communication](img/11_renderXX.png)
 
@@ -248,9 +254,9 @@ __C'est plus clair ?__
 
 ## Partage ui <-> server
 
-__Le server et l'ui communiquent uniquement par le biais des inputs et des outputs__
+Le serveur et l'UI communiquent __uniquement par le biais des inputs et des outputs__
 
-- Nous pouvons ajouter un script nommé **global.R** pour partager des éléments (variables,  packages, ...) entre la partie __UI__ et la partie __SERVER__ 
+- Un script **global.R** peut compléter le **ui.R** et le **server.R** pour partager des éléments entre la partie __UI__ et la partie __serveur__, par exemple au chargement de l'application (packages, tables)
 
 - Tout ce qui est présent dans le **global.R** est visible à la fois dans le __ui.R__ et dans le __server.R__
 
@@ -601,18 +607,20 @@ output$texte <- renderText({
 - __ui.r__: 
 
 ```{r, echo = TRUE, eval = FALSE}
-plotOutput("myplot")
+plotOutput("plot_iris")
 ```
 
 - __server.r__:
 
 ```{r, echo = TRUE, eval = FALSE}
 output$myplot <- renderPlot({
-  hist(iris$Sepal.Length)
+  plot(x = iris$Sepal.Length, y = iris$Sepal.Width, 
+       col = iris$Species, pch = 20,
+       xlab = "Sepal length", ylab = "Sepal width")
 })
 ```
 
-![op3](img/28_oplot.png)
+![op3](img/28_plot_iris.png)
 
 ## Table
 

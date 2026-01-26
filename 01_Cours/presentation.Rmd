@@ -1,6 +1,6 @@
 ---
-title: "Premiers pas avec R Shiny... et les packages de visualisation interactive"
-author: "B.Thieurmel, benoit.thieurmel@datastorm.fr"
+title: "Premiers pas avec R Shiny...  <br> et les packages de visualisation interactive"
+author: "B.Thieurmel <br> Thibaut Dubois - thibaut.dubois@datastorm.fr <br> Julien Bretteville - julien.bretteville@datastorm.fr" 
 output:
   ioslides_presentation:
     css: css/shiny_niv1.css
@@ -54,7 +54,9 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
     * Divisée en deux parties : ui.R et server.R
     * Et utilisant par défaut la mise en page "sidebar layout"
 
-- Commandes utiles :
+<div style="height: 30px;"></div>
+
+- __Commandes utiles :__
     + Lancement de l'application : bouton __Run app__
     + Actualisatisation : bouton __Reload app__
     + Arrêt : bouton __Stop__

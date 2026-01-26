@@ -84,16 +84,14 @@ shinyApp(
 
 - __ui.r__: 
 ```{r, echo = TRUE, eval = FALSE}
-plotOutput("myplot")
+plotOutput("plot_iris")
 ```
 - __server.r__:
 ```{r, echo = TRUE, eval = FALSE}
-output$myplot <- renderPlot({
-  require(grDevices) # for colours
-  tN <- table(Ni <- stats::rpois(100, lambda = 5))
-  
-  r <- barplot(tN, col = rainbow(20))
-  lines(r, tN, type = "h", col = "red", lwd = 2)
+output$plot_iris <- renderPlot({
+  plot(x = iris$Sepal.Length, y = iris$Sepal.Width, 
+       col = iris$Species, pch = 20,
+       xlab = "Sepal length", ylab = "Sepal width")
 })
 ```
 
@@ -102,15 +100,13 @@ output$myplot <- renderPlot({
 ```{r, echo = FALSE}
 rmarkdown::render_delayed({
   shinyApp(ui = fluidPage(
-    tags$div(plotOutput("myplot"), align = 'center')
+    tags$div(plotOutput("plot_iris"), align = 'center')
   ), 
   server = function(input, output) {
-    output$myplot <- renderPlot({
-      require(grDevices) # for colours
-      tN <- table(Ni <- stats::rpois(100, lambda = 5))
-      
-      r <- barplot(tN, col = rainbow(20))
-      lines(r, tN, type = "h", col = "red", lwd = 2)
+    output$plot_iris <- renderPlot({
+      plot(x = iris$Sepal.Length, y = iris$Sepal.Width, 
+       col = iris$Species, pch = 20,
+       xlab = "Sepal length", ylab = "Sepal width")
     })
   })
 })
