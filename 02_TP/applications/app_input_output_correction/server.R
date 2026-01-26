@@ -1,4 +1,5 @@
 library(shiny)
+library(DT)
 
 # Define server logic required to draw a histogram
 function(input, output) {
@@ -21,7 +22,10 @@ function(input, output) {
   
   # table
   output$table <- DT::renderDT({
-    faithful
+    DT::datatable(faithful, rownames = FALSE, editable = "cell") %>%
+      formatStyle('eruptions',  color = 'red', fontWeight = 'bold') %>%
+      formatStyle('waiting',  backgroundColor = 'lightgreen',
+                  color = styleInterval(c(70), c('purple', 'orange')))
   })
   
   # nombre de classe
