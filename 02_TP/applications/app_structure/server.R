@@ -6,7 +6,7 @@ function(input, output) {
   output$distPlot <- renderPlot({
     
     # generate bins based on input$bins from ui.R
-    x    <- faithful[, input$var] 
+    x    <- iris[, input$var] 
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
     
     # draw the histogram with the specified number of bins
@@ -16,12 +16,12 @@ function(input, output) {
   
   # summary
   output$summary <- renderPrint({
-    summary(faithful)
+    summary(iris)
   })
   
   # table
   output$table <- DT::renderDT({
-    faithful
+    iris
   })
   
   # nombre de classe
