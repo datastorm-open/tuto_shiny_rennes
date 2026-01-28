@@ -3,43 +3,43 @@ function(input, output, session) {
   
   # partage du vecteur entre les outpus en
   data <- reactive({
-    faithful[, input$var] 
+    iris[, input$var] 
   })
   
-  # renderPlot <- renderAmCharts
-  # output$distPlot <- renderAmCharts({
-  #   input$go # input declenchant la reactivite
-  #   # reste du code isole
-  #   isolate({
-  #     # generate bins based on input$bins from ui.R
-  #     x    <- data()
-  #     bins <- round(seq(min(x), max(x), length.out = input$bins + 1), 2)
-  #     
-  #     # use amHist
-  #     amHist(x = x, control_hist = list(breaks = bins), 
-  #            col = input$color, main = input$titre, 
-  #            export = TRUE, zoom = TRUE)
-  #   })
-  # })
+  # renderPlot <- renderPlotly
+  output$distPlot <- renderPlotly({
+    input$go # input declenchant la reactivite
+    # reste du code isole
+    isolate({
+      # generate bins based on input$bins from ui.R
+      x    <- data()
+      bins <- round(seq(min(x), max(x), length.out = input$bins + 1), 2)
+
+      # use amHist
+      plot_ly(x = x, type = "histogram", nbinsx = bins, color = I(input$color)) %>%
+        layout(title = input$titre)
+    })
+  })
   
-  # renderPlot <- renderAmCharts
-  # output$boxplot <- renderAmCharts({
-  #   input$go # input declenchant la reactivite
-  #   # reste du code isole
-  #   isolate({
-  #     x <-  data()
-  #     amBoxplot(x, col = input$color, main = "Boxplot", export = TRUE, zoom = TRUE)
-  #   })
-  # })
+  # renderPlot <- renderPlotly
+  output$boxplot <- renderPlotly({
+    input$go # input declenchant la reactivite
+    # reste du code isole
+    isolate({
+      x <-  data()
+      plot_ly(y = ~x, x=~Species, type = "box", data = iris, color = I(input$color), name = input$var, boxmean = "sd") %>%
+        layout(title = list(text = "Boxplot", font = list(color = "orange", size = 18)))
+    })
+  })
   
   # summary
   output$summary <- renderPrint({
-    summary(faithful)
+    summary(iris)
   })
   
   # table
   output$table <- DT::renderDT({
-    faithful
+    iris
   })
   
   # nombre de classe

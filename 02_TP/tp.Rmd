@@ -204,20 +204,3 @@ output$plot <- renderPlot({
 * Dans un troisième onglet, rédiger un petit résumé sur vous/votre société. Essayer d'ajouter un image (``div`` & ``img``) et un lien vers un site internet (``a``).
 
 * __Aller plus loin__ : Changer le thème de l’application en insérant un .css externe. Par exemple en utilisant bootswatch http://bootswatch.com/3). Attention, **shiny** utilise la version ``3.3.7`` de bootstrap .
-
-# Prêt pour créer votre application ?
-
-Pour clore cette formation **Shiny**, nous vous proposons la réalisation d’un mini-projet. Celui-ci consistera en la création d’une application Shiny qui répondra à l’une de vos problématiques métier, à partir d’un jeu de données de votre choix.
-
-Vous pouvez vous inspirer des applications présentes sur les sites suivants :
-
-- http://shiny.rstudio.com/gallery/
-- http://www.showmeshiny.com/
-
-Afin de réaliser une application qui respecte la charte graphique de votre entreprise ou de customiser votre application selon vos envies, vous pouvez ajouter une feuille de style css à votre projet, en vous inspirant par exemple des css du site suivant :
-
-- http://bootswatch.com/
-
-Et pourquoi ne pas utiliser quelques graphiques intéractifs ? 
-
-- http://gallery.htmlwidgets.org/

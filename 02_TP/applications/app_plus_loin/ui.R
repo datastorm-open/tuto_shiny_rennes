@@ -41,7 +41,7 @@ fluidPage(
                                  textInput(inputId = "titre", label = "Titre :", value = "Histogramme"),
                                  
                                  # selection de la colonne
-                                 radioButtons(inputId = "var", label = "Variable : ", choices = colnames(faithful)),
+                                 radioButtons(inputId = "var", label = "Variable : ", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),
                                  
                                  # bouton
                                  actionButton("go", "GO!!!")
@@ -51,12 +51,12 @@ fluidPage(
                         column(width = 9, 
                                tabsetPanel(id = "viz", 
                                  tabPanel("Histogramme", 
-                                          # plotOutput -> amChartsOutput
-                                          amChartsOutput("distPlot"),
+                                          # plotOutput -> plotlyOutput
+                                          plotlyOutput("distPlot"),
                                           # classes (div centrée)
                                           div(textOutput("n_bins"), align = "center")
                                  ),
-                                 tabPanel("Boxplot", amChartsOutput("boxplot"))
+                                 tabPanel("Boxplot", plotlyOutput("boxplot"))
                                )
                         )
                       )
