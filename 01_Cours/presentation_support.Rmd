@@ -5,6 +5,14 @@ author:
   - Thibaut Dubois - thibaut.dubois@datastorm.fr 
   - Julien Bretteville - julien.bretteville@datastorm.fr
 output:
+  word_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    fig_caption: no
+    theme: journal
+    toc: yes
+    toc_depth: 2
   pdf_document:
     fig_caption: no
     fig_crop: no
@@ -15,14 +23,6 @@ output:
     number_sections: yes
     toc: yes
     toc_depth: 2
-  html_document:
-    fig_caption: no
-    theme: journal
-    toc: yes
-    toc_depth: 2
-  word_document:
-    toc: yes
-    toc_depth: '2'
 header-includes:
 - \usepackage{graphicx}
 - \usepackage{float}
@@ -951,6 +951,138 @@ visNetwork(nodes, edges) %>%
 
 ![vis](img/43_visnetwork.png)
 
+
+
+# Observe & fonctions d'update
+
+## Introduction
+
+- Il existe une série de fonctions pour mettre à jour les inputs et certaines structures
+
+- les fonctions commencent par ``update...``
+
+- On les utilise généralement à l'intérieur d'un ``observe({expr})``
+
+- La syntaxe est similaire à celle des fonctions de création
+
+- __Attention__ : il est nécessaire d'ajouter un argument _"session"_  dans la définition du  **server** 
+
+```{r, echo = TRUE, eval = FALSE}
+server <- function(input, output, session) {...}
+```
+
+Sur des inputs :
+
+- __updateCheckboxGroupInput__
+- __updateCheckboxInput__
+- __updateDateInput	Change__ 
+- __updateDateRangeInput__
+- __updateNumericInput__
+- __updateRadioButtons__ 
+- __updateSelectInput__ 
+- __updateSelectizeInput__
+- __updateSliderInput__
+- __updateTextInput__	
+
+Pour changer dynamiquement l'onglet sélectionné :
+
+- __updateNavbarPage__,  __updateNavlistPanel__, __updateTabsetPanel__
+
+## Exemple sur un input
+
+```{r, echo = TRUE, eval = FALSE}
+fluidPage(
+  titlePanel("Observe"),
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons(inputId = "id_dataset", label = "Choose a dataset", inline = TRUE,
+                   choices = c("cars", "iris", "quakes"), selected = "cars"),
+      selectInput("id_col", "Choose a column", choices = colnames(cars)),
+      textOutput(outputId = "txt_obs")
+    ),
+    mainPanel(fluidRow(
+      DT::DTOutput(outputId = "dataset_obs")
+    ))
+  )
+)
+```
+
+
+```{r, echo = TRUE, eval = FALSE}
+function(input, output, session) {
+  dataset <- reactive(get(input$id_dataset, "package:datasets"))
+  
+  observe({
+    updateSelectInput(session, inputId = "id_col", label = "Choose a column",
+                      choices = colnames(dataset()))
+  })
+  
+  output$txt_obs <- renderText(paste0("Selected column : ", input$id_col))
+  
+  output$dataset_obs <- DT::renderDT(
+    dataset(),
+    options = list(pageLength = 5)
+  )
+}
+```
+
+![obs1](img/48_observer1.png)
+
+![obs2](img/49_observer2.png)
+
+
+##  Exemple sur des onglets 
+
+__Il faut rajouter un id dans la structure__
+
+```{r, echo = TRUE, eval = FALSE}
+fluidPage(
+  navbarPage(
+    id = "idnavbar", # need an id for oberve & update
+    title = "A NavBar",
+    tabPanel(title = "Summary",
+             actionButton("goPlot", "Go to plot !")),
+    tabPanel(title = "Plot",
+             actionButton("goSummary", "Go to Summary !"))
+    
+  )
+)
+```
+
+
+```{r, echo = TRUE, eval = FALSE}
+function(input, output, session) {
+  observe({
+    input$goPlot
+    updateTabsetPanel(session, "idnavbar", selected = "Plot")
+  })
+  observe({
+    input$goSummary
+    updateTabsetPanel(session, "idnavbar", selected = "Summary")
+  })
+}
+```
+
+## observeEvent
+
+- Une variante de la fonction ``observe`` est disponible avec la fonction ``observeEvent``
+- On définit alors de façon explicite l'expression qui représente l'événement _et_ l'expression qui sera éxécutée quand l'événement se produit
+
+```{r, echo = TRUE, eval = FALSE}
+# avec un observe
+observe({
+  input$goPlot
+  updateTabsetPanel(session, "idnavbar", selected = "Plot")
+})
+
+# idem avec un observeEvent
+observeEvent(input$goSummary, {
+  updateTabsetPanel(session, "idnavbar", selected = "Summary")
+})
+```
+
+
+
 # Isolation
 
 ## Définition
@@ -1116,8 +1248,9 @@ server = function(input, output) {
 })
 ```
 
-
 ![](img/46_RV.png)
+
+
 
 # Conditional panels
 
@@ -1163,133 +1296,6 @@ shinyApp(
 ![cond1](img/47_cond1.png)
 
 
-# Observe & fonctions d'update
-
-## Introduction
-
-- Il existe une série de fonctions pour mettre à jour les inputs et certaines structures
-
-- les fonctions commencent par ``update...``
-
-- On les utilise généralement à l'intérieur d'un ``observe({expr})``
-
-- La syntaxe est similaire à celle des fonctions de création
-
-- __Attention__ : il est nécessaire d'ajouter un argument _"session"_  dans la définition du  **server** 
-
-```{r, echo = TRUE, eval = FALSE}
-server <- function(input, output, session) {...}
-```
-
-Sur des inputs :
-
-- __updateCheckboxGroupInput__
-- __updateCheckboxInput__
-- __updateDateInput	Change__ 
-- __updateDateRangeInput__
-- __updateNumericInput__
-- __updateRadioButtons__ 
-- __updateSelectInput__ 
-- __updateSelectizeInput__
-- __updateSliderInput__
-- __updateTextInput__	
-
-Pour changer dynamiquement l'onglet sélectionné :
-
-- __updateNavbarPage__,  __updateNavlistPanel__, __updateTabsetPanel__
-
-## Exemple sur un input
-
-```{r, echo = TRUE, eval = FALSE}
-fluidPage(
-  titlePanel("Observe"),
-  sidebarLayout(
-    sidebarPanel(
-      radioButtons(inputId = "id_dataset", label = "Choose a dataset", inline = TRUE,
-                   choices = c("cars", "iris", "quakes"), selected = "cars"),
-      selectInput("id_col", "Choose a column", choices = colnames(cars)),
-      textOutput(outputId = "txt_obs")
-    ),
-    mainPanel(fluidRow(
-      DT::DTOutput(outputId = "dataset_obs")
-    ))
-  )
-)
-```
-
-
-```{r, echo = TRUE, eval = FALSE}
-function(input, output, session) {
-  dataset <- reactive(get(input$id_dataset, "package:datasets"))
-  
-  observe({
-    updateSelectInput(session, inputId = "id_col", label = "Choose a column",
-                      choices = colnames(dataset()))
-  })
-  
-  output$txt_obs <- renderText(paste0("Selected column : ", input$id_col))
-  
-  output$dataset_obs <- DT::renderDT(
-    dataset(),
-    options = list(pageLength = 5)
-  )
-}
-```
-
-![obs1](img/48_observer1.png)
-
-![obs2](img/49_observer2.png)
-
-
-##  Exemple sur des onglets 
-
-__Il faut rajouter un id dans la structure__
-
-```{r, echo = TRUE, eval = FALSE}
-fluidPage(
-  navbarPage(
-    id = "idnavbar", # need an id for oberve & update
-    title = "A NavBar",
-    tabPanel(title = "Summary",
-             actionButton("goPlot", "Go to plot !")),
-    tabPanel(title = "Plot",
-             actionButton("goSummary", "Go to Summary !"))
-    
-  )
-)
-```
-
-
-```{r, echo = TRUE, eval = FALSE}
-function(input, output, session) {
-  observe({
-    input$goPlot
-    updateTabsetPanel(session, "idnavbar", selected = "Plot")
-  })
-  observe({
-    input$goSummary
-    updateTabsetPanel(session, "idnavbar", selected = "Summary")
-  })
-}
-```
-
-## observeEvent
-
-- Une variante de la fonction ``observe`` est disponible avec la fonction ``observeEvent``
-- On définit alors de façon explicite l'espression qui représente l'événement _et_ l'expression qui sera éxécutée quand l'événement se produit
-
-```{r, echo = TRUE, eval = FALSE}
-# avec un observe
-observe({
-  input$goPlot
-  updateTabsetPanel(session, "idnavbar", selected = "Plot")
-})
-
-# idem avec un observeEvent
-observeEvent(input$goSummary, {
-  updateTabsetPanel(session, "idnavbar", selected = "Summary")
-})
-```
 
 # HTML / CSS
 
@@ -1304,7 +1310,7 @@ names(shiny::tags)
 
 ![grid](img/50_tags.png)
 
-C'est également possible de passer du code __HTML__ directement en utilisant la fonction du même nom :
+Il est également possible de passer du code __HTML__ directement en utilisant la fonction du même nom :
 
 ```{r, eval = FALSE}
 fluidPage(
@@ -1339,18 +1345,18 @@ On peut aussi utiliser le package [shinythemes](http://rstudio.github.io/shinyth
 
 On peut par exemple aller prendre un thème sur [bootswatch](http://bootswatch.com/).
 
-- Deux façons pour le renseigner : 
-      + argument ``theme`` présent dans certaines fonctions (``fluidPage``, ``navbarPage``, ...)
-      + ou avec un tags html : ``tags$head`` et ``tags$link``
+- Deux façons pour le renseigner :   
+      + Via un argument ``theme`` présent dans certaines fonctions (``fluidPage``, ``navbarPage``, ...)     
+      + Via un tags html : ``tags$head`` et ``tags$link``
 
 ```{r, eval = FALSE}
 library(shiny)
 ui <- fluidPage(theme = "mytheme.css",
-                # ou avec un tags
-                tags$head(
-                  tags$link(rel = "stylesheet", type = "text/css", href = "mytheme.css")
-                ),
-                # reste de l'application
+  # ou avec un tags
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "mytheme.css")
+  ),
+  # reste de l'application
 )
 ```
 
@@ -1363,12 +1369,11 @@ ui <- fluidPage(theme = "mytheme.css",
 - inclusion avec les tags html : ``tags$head`` et ``tags$style``
 
 ```{r, eval = FALSE}
-library(shiny)
-tags$head(
-  tags$style(HTML("h1 { color: #48ca3b;}")
-  )
-),
-# reste de l'application
+ui <- fluidPage(
+  tags$head(
+    tags$style(HTML("h1 { color: #48ca3b;}")
+  ),
+  # reste de l'application
 )
 ```
 
@@ -1379,9 +1384,9 @@ tags$head(
 Pour finir, on peut également passer directement du __CSS__ aux éléments __HTML__ :
 
 ```{r, eval = FALSE}
-library(shiny)
-h1("Mon titre", style = "color: #48ca3b;")
-# reste de l'application
+ui <- fluidPage(
+  h1("Mon titre", style = "color: #48ca3b;"),
+  # reste de l'application
 )
 ```
 
@@ -1409,6 +1414,8 @@ function(input, output, session) {
   source("src/server/02_server_data.R", local = TRUE)
 }
 ```
+
+
 
 # Débogage
 
