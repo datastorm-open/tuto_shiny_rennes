@@ -96,16 +96,16 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 ```{r child = 'slides/06_htmlwidgets.Rmd'}
 ```
 
-```{r child = 'slides/07_isolation.Rmd'}
+```{r child = 'slides/07_observe_update.Rmd'}
 ```
 
-```{r child = 'slides/08_reactive.Rmd'}
+```{r child = 'slides/08_isolation.Rmd'}
 ```
 
-```{r child = 'slides/09_conditionnal.Rmd'}
+```{r child = 'slides/09_reactive.Rmd'}
 ```
 
-```{r child = 'slides/10_observe_update.Rmd'}
+```{r child = 'slides/10_conditionnal.Rmd'}
 ```
 
 ```{r child = 'slides/11_css.Rmd'}
