@@ -226,6 +226,26 @@ output$fluidRow_ui <- renderUI(fluidRow(
 ))
 ```
 
+## <span style="color:#FB2C36;">Pour aller plus loin : L'add-in esquisse</span>
+
+<span style="color:#57534D;">__esquisse est un package R qui s'utilise en dehors ou à l'intérieur d'une application shiny. __</span> [https://dreamrs.github.io/esquisse/](https://dreamrs.github.io/esquisse/)
+
+Cet add-in permet de créer des graphiques ggplot2 en mode *drag and drop*. Il suffit d'avoir des données chargées et d'exécuter l'add-in. Ensuite, il est possible de créer des graphiques ggplot2 assez avancés et de récupérer le code pour les construire.
+
+```{r, echo = TRUE, eval = FALSE}
+install.packages("esquisse")
+library(esquisse)
+esquisse::esquisser()
+# or with your data:
+esquisse::esquisser(palmerpenguins::penguins)
+```
+
+## <span style="color:#FB2C36;">Pour aller plus loin : L'add-in esquisse</span>
+
+<div style="text-align:center" markdown="1">
+<img src="img/31bis_esquisse.png" alt="Drawing" style="width: 80%;">
+</div>
+
 ## <span style="color:#FB2C36;">Pour aller plus loin : construire son propre output</span>
 
 <span style="color:#57534D;">__Avec un peu de compétences en HTML/CSS/JavaScript, il est également possible de construire des outputs personnalisés__</span>

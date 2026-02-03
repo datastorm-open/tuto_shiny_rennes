@@ -530,6 +530,18 @@ server = function(input, output) {
   
 - <span style="color:#57534D;">Donnez des _id_ parlants à vos inputs pour faciliter le débogage !</span> 
 
+## <span style="color:#FB2C36;">Pour aller plus loin : le package shinyWidgets</span>
+
+<span style="color:#57534D;">Le package shinyWidgets permet de créer des inputs plus jolis que le package shiny :</span> [https://dreamrs.github.io/shinyWidgets/](https://dreamrs.github.io/shinyWidgets/)
+
+<span style="color:#57534D;">Une application de démo est disponible au sein du package avec des exemples d'inputs, il suffit d'exécuter les lignes suivantes :</span>
+
+```{r, echo = TRUE, eval = FALSE}
+install.packages("shinyWidgets")
+library(shinyWidgets)
+shinyWidgets::shinyWidgetsGallery()
+```
+
 
 ## <span style="color:#FB2C36;">Pour aller plus loin : construire son propre input</span>
 

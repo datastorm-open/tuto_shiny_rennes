@@ -4,6 +4,7 @@
 
 Avec notamment l'arrivée du package [htmlwidgets](http://www.htmlwidgets.org/), de plus en plus de fonctionnalités de librairies javascript sont accessibles sous __R__ : 
 
+* [plotly](https://plotly.com/r/)
 * [dygraphs (time series)](http://rstudio.github.io/dygraphs/)
 * [DT (interactive tables)](http://rstudio.github.io/DT/)
 * [Leafet (maps)](http://rstudio.github.io/leaflet/)

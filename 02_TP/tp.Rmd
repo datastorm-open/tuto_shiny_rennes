@@ -1,7 +1,9 @@
 ---
 title: "Premiers pas avec shiny... et les packages de visualisation interactive"
-author: |
-  | B.Thieurmel, benoit.thieurmel@datastorm.fr
+author:
+  - B.Thieurmel 
+  - Thibaut Dubois - thibaut.dubois@datastorm.fr 
+  - Julien Bretteville - julien.bretteville@datastorm.fr
 output:
   pdf_document:
     number_sections: true
@@ -73,7 +75,10 @@ https://cran.r-project.org/web/packages/colourpicker/vignettes/colourpicker.html
   * Modifier la couleur de fond de la colonne 2 en vert clair 
   * Mettre toutes les valeurs de la colonne 2 inférieures à 70 en violet et les autres en orange
 
+* __Aller plus loin__ : Regarder les inputs disponibles dans le package shinyWidgets [https://dreamrs.github.io/shinyWidgets/](https://dreamrs.github.io/shinyWidgets/) et, quand c'est possible, remplacer les inputs utilisés dans votre application par des inputs shinyWidgets
+
 * __Aller plus loin__ : Permettre à l’utilisateur d’exporter les graphiques. (``downloadButton`` & ``jpeg``)
+
 ## Structure
 
 Repartons de l'application **app_structure**, équivalente à la précédente avec l'ajout d'une ``navbarPage`` avec maintenant : 

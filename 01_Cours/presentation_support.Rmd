@@ -1,6 +1,9 @@
 ---
 title: "Premiers pas avec shiny... et les packages de visualisation interactive"
-author: "B.Thieurmel, benoit.thieurmel@datastorm.fr"
+author: 
+  - B.Thieurmel 
+  - Thibaut Dubois - thibaut.dubois@datastorm.fr 
+  - Julien Bretteville - julien.bretteville@datastorm.fr
 output:
   pdf_document:
     fig_caption: no
@@ -51,7 +54,7 @@ Une application __shiny__ nécessite un ordinateur/un serveur éxécutant __R__
 
 - Initialiser une application est simple avec __RStudio__, en créant un nouveau projet
 
-* File > New Project > New Directory > Shiny Web Application
+* File -> New File -> New Shiny Web App
 * Divisée en deux parties : ui.R et server.R
 * Et utilisant par défaut la mise en page "sidebar layout"
 
@@ -524,6 +527,18 @@ actionButton(inputId = "idActionButton", label = "Click !",
   
 - <span style="color:#57534D;">Donnez des _id_ parlants à vos inputs pour faciliter le débogage !</span> 
 
+## <span style="color:#FB2C36;">Pour aller plus loin : le package shinyWidgets</span>
+
+<span style="color:#57534D;">Le package shinyWidgets permet de créer des inputs plus jolis que le package shiny :</span> [https://dreamrs.github.io/shinyWidgets/](https://dreamrs.github.io/shinyWidgets/)
+
+<span style="color:#57534D;">Une application de démo est disponible au sein du package avec des exemples d'inputs, il suffit d'exécuter les lignes suivantes :</span>
+
+```{r, echo = TRUE, eval = FALSE}
+install.packages("shinyWidgets")
+library(shinyWidgets)
+shinyWidgets::shinyWidgetsGallery()
+```
+
 
 ## <span style="color:#FB2C36;">Pour aller plus loin : construire son propre input</span>
 
@@ -697,7 +712,25 @@ output$fluidRow_ui <- renderUI(
 )
 ```
 
-Pour aller plus loin : construire son propre output
+
+## <span style="color:#FB2C36;">Pour aller plus loin : L'add-in esquisse</span>
+
+<span style="color:#57534D;">__esquisse est un package R qui s'utilise en dehors ou à l'intérieur d'une application shiny. __</span> [https://dreamrs.github.io/esquisse/](https://dreamrs.github.io/esquisse/)
+
+Cet add-in permet de créer des graphiques ggplot2 en mode *drag and drop*. Il suffit d'avoir des données chargées et d'exécuter l'add-in. Ensuite, il est possible de créer des graphiques ggplot2 assez avancés et de récupérer le code pour les construire.
+
+```{r, echo = TRUE, eval = FALSE}
+install.packages("esquisse")
+library(esquisse)
+esquisse::esquisser()
+# or with your data:
+esquisse::esquisser(palmerpenguins::penguins)
+```
+
+
+![esquisse](img/31bis_esquisse.png)
+
+## <span style="color:#FB2C36;">Pour aller plus loin : construire son propre output</span>
 
 __Avec un peu de compétences en HTML/CSS/JavaScript, il est également possible de construire des outputs personnalisés__
 
@@ -864,6 +897,7 @@ Toutes les structures peuvent s'utiliser en même temps !
 
 Avec notamment l'arrivée du package [htmlwidgets](http://www.htmlwidgets.org/), de plus en plus de fonctionnalités de librairies javascript sont accessibles sous __R__ : 
 
+* [plotly](https://plotly.com/r/)
 * [dygraphs (time series)](http://rstudio.github.io/dygraphs/)
 * [DT (interactive tables)](http://rstudio.github.io/DT/)
 * [Leafet (maps)](http://rstudio.github.io/leaflet/)
