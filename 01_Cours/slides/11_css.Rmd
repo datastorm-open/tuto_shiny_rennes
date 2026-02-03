@@ -14,7 +14,7 @@ names(tags)
 <img src="img/50_tags.png" alt="Drawing" style="width: 100%;">
 </div>
 
-C'est également possible de passer du code __HTML__ directement en utilisant la fonction du même nom :
+Il est également possible de passer du code __HTML__ directement en utilisant la fonction du même nom :
 
 ```{r, eval = FALSE}
 fluidPage(
@@ -49,9 +49,9 @@ On peut aussi utiliser le package [shinythemes](http://rstudio.github.io/shinyth
 
 On peut par exemple aller prendre un thème sur [bootswatch](http://bootswatch.com/).
 
-- Deux façons pour le renseigner : 
-      + argument ``theme`` présent dans certaines fonctions (``fluidPage``, ``navbarPage``, ...)
-      + ou avec un tags html : ``tags$head`` et ``tags$link``
+- Deux façons pour le renseigner :   
+      + Via un argument ``theme`` présent dans certaines fonctions (``fluidPage``, ``navbarPage``, ...)     
+      + Via un tags html : ``tags$head`` et ``tags$link``
 
 ```{r, eval = FALSE}
 library(shiny)
@@ -77,7 +77,7 @@ shinyAppDir(appDir = "../shinyApps/customCSS/cssfile")
 - inclusion avec les tags html : ``tags$head`` et ``tags$style``
 
 ```{r, eval = FALSE}
-library(shiny)
+ui <- fluidPage(
   tags$head(
     tags$style(HTML("h1 { color: #48ca3b;}")
     )
@@ -98,8 +98,8 @@ shinyAppDir(appDir = "../shinyApps/customCSS/cssheader")
 Pour finir, on peut également passer directement du __CSS__ aux éléments __HTML__ :
 
 ```{r, eval = FALSE}
-library(shiny)
-  h1("Mon titre", style = "color: #48ca3b;")
+ui <- fluidPage(
+  h1("Mon titre", style = "color: #48ca3b;"),
   # reste de l'application
 )
 ```
