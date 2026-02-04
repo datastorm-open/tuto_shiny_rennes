@@ -12,6 +12,8 @@ header-includes:
   - \renewcommand{\and}{\\}
 ---
 
+
+
 # Premiers pas
 
 Créer un nouveau répertoire pour l'application shiny (__dans RStudio__):
@@ -24,6 +26,8 @@ Deux fichiers sont créés automatiquement : ui.R et server.R. Lancer directemen
 
 * Remplacer le titre de l'application par "Premiers pas avec shiny". 
 * Mettre à jour l'application et vérifier la prise en compte de la modification.
+
+
 
 # Input - Output
 
@@ -82,7 +86,9 @@ https://github.com/daattali/colourpicker
 
 * __Aller plus loin__ : Permettre à l’utilisateur d’exporter les graphiques. (``downloadButton`` & ``jpeg``)
 
-## Structure
+
+
+# Structure
 
 Repartons de l'application **app_structure**, équivalente à la précédente avec l'ajout d'une ``navbarPage`` avec maintenant : 
 
@@ -134,6 +140,7 @@ tabsetPanel(
 * __Aller plus loin__ : utiliser [shinydashboard](https://rstudio.github.io/shinydashboard/) (https://rstudio.github.io/shinydashboard/) pour restructurer votre application.
 
 
+
 # Premiers graphiques intéractifs
 
 * Remplacer l'histogramme et le boxplot par des graphiques javascript en utilisant le package **plotly** (https://github.com/plotly/plotly.R). (fonction `` plot_ly()``), 
@@ -170,6 +177,8 @@ plotlyOutput("distPlot")
 
 * __Aller plus loin__ : Et pourquoi ne pas tester d'autres packages ? (http://gallery.htmlwidgets.org/)
   * Créer un nouvel onglet et y ajouter une carte avec le package leaflet. Y renseigner un marker avec les coordonnées de l'université (48.119352469264065, -1.701461600501221). Voir https://rstudio.github.io/leaflet/articles/leaflet.html
+
+
 
 # Réactivité, isolation, observe, html, ...
 
