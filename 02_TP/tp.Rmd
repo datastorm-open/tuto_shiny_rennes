@@ -1,13 +1,15 @@
 ---
 title: "Premiers pas avec shiny... et les packages de visualisation interactive"
 author:
-  - B.Thieurmel 
-  - Thibaut Dubois - thibaut.dubois@datastorm.fr 
+  - Benoît Thieurmel
   - Julien Bretteville - julien.bretteville@datastorm.fr
+  - Thibaut Dubois - thibaut.dubois@datastorm.fr 
 output:
   pdf_document:
     number_sections: true
     highlight: tango
+header-includes:
+  - \renewcommand{\and}{\\}
 ---
 
 # Premiers pas
@@ -25,7 +27,8 @@ Deux fichiers sont créés automatiquement : ui.R et server.R. Lancer directemen
 
 # Input - Output
 
-Pour l'instant, nous mettrons : 
+Pour l'instant, nous mettrons :  
+
 - Les nouveaux *inputs* dans le ``sidebarPanel``, après le ``sliderInput`` déjà présent, en n'oubliant pas de les séparer avec une virgule !
 
 - Les nouveaux *outputs* dans le ``mainPanel``, après le ``plotOutput`` déjà présent, en n'oubliant pas de les séparer avec une virgule !
@@ -65,7 +68,7 @@ output$summary <- renderPrint({
 * Remplacer le ``selectInput`` créé pour le choix de la couleur par un ``colourInput`` (fonction présente dans le package **colourpicker**)
 
 
-https://cran.r-project.org/web/packages/colourpicker/vignettes/colourpicker.html
+https://github.com/daattali/colourpicker
 
 
 * __Aller plus loin__ : Essayer de rajouter des options à la visualisation des données. Vous pouvez aller voir également le package complèmentaire [DT](https://rstudio.github.io/DT/) (https://rstudio.github.io/DT/). 
