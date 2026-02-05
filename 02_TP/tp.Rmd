@@ -77,7 +77,7 @@ https://github.com/daattali/colourpicker
 
 * __Aller plus loin__ : Essayer de rajouter des options à la visualisation des données. Vous pouvez aller voir également le package complèmentaire [DT](https://rstudio.github.io/DT/) (https://rstudio.github.io/DT/). 
   * Supprimer les rownames (*rownames = FALSE*)
-  * Rendre possible la modification des valeurs des cellules (utiliser l'argument *editable*)
+  * Rendre possible l'édition des valeurs des cellules (utiliser l'argument *editable*)
   * Modifier les valeurs de la colonne 1 en rouge et en gras (utiliser la fonction ``DT::formatStyle``)
   * Modifier la couleur de fond de la colonne 2 en vert clair 
   * Mettre toutes les valeurs de la colonne 2 inférieures à 70 en violet et les autres en orange
@@ -153,9 +153,11 @@ La syntaxe pour l'histogramme côté serveur est la suivante avec le remplacemen
 output$distPlot <- renderPlotly({
     x    <- iris[, input$var]
     bins <- input$bins
-    # Le I fait parti de la syntaxe plotly et est nécessaire pour l'utilisation de couleur, la taille des points etc.
-    # Le %>% ou pipe permet d'enchainer les opérations successives. Dans le cas de ce graphique,
-    # un premier appel est fait pour créer le graph et un second pour y ajouter un titre.
+    # Le I fait parti de la syntaxe plotly et est nécessaire pour 
+    # l'utilisation de couleur, la taille des points etc.
+    # Le %>% ou pipe permet d'enchainer les opérations successives. 
+    # Dans le cas de ce graphique, un premier appel est fait 
+    # pour créer le graph et un second pour y ajouter un titre.
     plot_ly(x = x, type = "histogram", nbinsx = bins, color = I(input$color)) %>%
       layout(title = input$titre)
 })

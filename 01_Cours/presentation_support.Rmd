@@ -5,14 +5,6 @@ author:
   - Thibaut Dubois - thibaut.dubois@datastorm.fr 
   - Julien Bretteville - julien.bretteville@datastorm.fr
 output:
-  word_document:
-    toc: yes
-    toc_depth: '2'
-  html_document:
-    fig_caption: no
-    theme: journal
-    toc: yes
-    toc_depth: 2
   pdf_document:
     fig_caption: no
     fig_crop: no
@@ -23,6 +15,14 @@ output:
     number_sections: yes
     toc: yes
     toc_depth: 2
+  html_document:
+    fig_caption: no
+    theme: journal
+    toc: yes
+    toc_depth: 2
+  word_document:
+    toc: yes
+    toc_depth: '2'
 header-includes:
 - \usepackage{graphicx}
 - \usepackage{float}
