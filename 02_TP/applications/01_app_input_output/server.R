@@ -13,14 +13,27 @@ library(shiny)
 function(input, output) {
    
   output$distPlot <- renderPlot({
-    
     # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2] 
+    x    <- faithful[, input$sel_col] 
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
     
     # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    hist(x, breaks = bins, col = input$color, border = 'white',
+         main = input$hist_title)
     
+    # add some text
+    output$summary <- renderPrint({
+      summary(faithful)
+    })
+    
+    # add some table
+    output$my_dt <- DT::renderDT({
+      faithful
+    })
+    
+    # add number of bins
+    output$nb_bins <- renderText({
+      paste0("Le nombre de bins est : ", input$bins)
+    })
   })
-  
 }

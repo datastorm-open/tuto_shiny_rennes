@@ -176,7 +176,7 @@ rmarkdown::render_delayed({
 ## Observe & fonctions d'update | observeEvent
 
 - Une variante de la fonction ``observe`` est disponible avec la fonction ``observeEvent``
-- On définit alors de façon explicite l'espression qui représente l'événement _et_ l'expression qui sera éxécutée quand l'événement se produit
+- On définit alors de façon explicite l'expression qui représente l'événement _et_ l'expression qui sera éxécutée quand l'événement se produit
 
 ```{r, echo = TRUE, eval = FALSE}
 # avec un observe
